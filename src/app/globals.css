@@ -21,9 +21,21 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "POPPINS";
+  font-family: "overpass";
   max-width: 1800px;
-  margin:0 auto;
+  margin: 0 auto;
 }
-
-
+.square-red-btn {
+  background-color: #cf142b;
+  padding: 14px 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.rounded-white-btn {
+  background-color: #ffffff;
+  padding: 14px 10px;
+  border-radius: 15px;
+  color: #000000;
+  font-size: 22px;
+  font-weight: bold;
+}

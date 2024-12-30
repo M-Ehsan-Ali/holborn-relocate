@@ -1,157 +1,626 @@
-import Image from "next/legacy/image";
-
-export const cardsData = [
-  {
-    imageSrc: "/home/Certificate.svg",
-    title: "Mastering LinkedIn for 19 Years",
-    description:
-      "Guiding you with deep industry expertise on the world’s top professional network",
-    differentClassName: "bg-color_0166C8",
-  },
-  {
-    imageSrc: "/home/Communication.svg",
-    title: "Powerful Communication",
-    description: "Delivering messages that are clear, concise, and impactful",
-    differentClassName: "bg-color_174571 lg:mt-24",
-  },
-  {
-    imageSrc: "/home/Goal.svg",
-    title: "Effective LinkedIn Strategies",
-    description: "Practical solutions that maximize your time and results",
-    differentClassName: "bg-color_0166C8",
-  },
-  {
-    imageSrc: "/home/PersonalHotspot.svg",
-    title: "Global Network Advantage",
-    description:
-      "Tap into my extensive international connections across various industries and regions",
-    differentClassName: "bg-color_174571 lg:mt-24",
-  },
-];
+import Image from "next/image";
 
 export default function Home() {
   return (
     <div id="home">
-      <div className="px-4 lg:px-12 text-white">
-        <div className="pt-8 md:pt-16">
-          <div className="flex justify-center md:hidden">
-            <div className="relative w-[160px] h-[160px] overflow-hidden mb-4">
+      {/* Hero Section */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "60px",
+          marginTop: 140,
+          marginRight: 60,
+        }}
+      >
+        <div
+          style={{ color: "#FFFFFF", display: "flex", alignItems: "center" }}
+        >
+          <div>
+            <p
+              style={{ fontFamily: "Inter", fontWeight: "bold", fontSize: 45 }}
+            >
+              Welcome to Holborn Relocate
+            </p>
+            <p
+              style={{
+                fontFamily: "Outfit",
+                fontWeight: "normal",
+                fontSize: 28,
+              }}
+            >
+              Seamless Relocation to Dubai with Holborn Relocate
+            </p>
+            <div>
+              <button>Our Services</button>
+              <button>
+                Book a meeting{" "}
+                <span style={{ fontSize: 35, color: "#FFFFFF" }}>&#8594;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              position: "relative",
+            }}
+          >
+            <div
+              style={{
+                padding: "24px",
+                position: "absolute",
+                top: "-15%",
+                left: "-35%",
+                background: "rgba(255, 255, 255, 0.3)",
+                borderRadius: 10,
+                maxWidth: 450,
+              }}
+            >
+              <p style={{ textAlign: "center", color: "#FFFFFF" }}>
+                Holborn Relocate, led by Stephen Quinn, ensures a smooth
+                transition with expert visa and relocation services. Trust us to
+                make your move stress-free, whether for individuals or
+                businesses
+              </p>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                top: "-25%",
+                right: "-10%",
+              }}
+            >
               <Image
-                src="/home/quinn-man.jpeg"
-                alt="Quinn Man"
-                layout="fill"
-                objectFit="contain" // Ensures the image covers the circle without distorting
-                className="rounded-full bg-[#D3D3D3]"
+                src="/topRightHeroImage.png"
+                width="257"
+                height={203}
+                alt="top right image"
+              />
+            </div>
+            <div>
+              <Image
+                src="/mainHeroImage.png"
+                width="709"
+                height={633}
+                alt="main image midd"
+              />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                bottom: "-20%",
+                left: "-20%",
+              }}
+            >
+              <Image
+                src="/bottomLeftHeroImage.png"
+                width="326"
+                height={228}
+                alt="bottom left image"
               />
             </div>
           </div>
+        </div>
+      </div>
+      {/* Second Section Why Helborn */}
+      <div
+        style={{
+          marginTop: 120,
+          color: "#FFFFFF",
+          borderBottom: "1px solid #BFBDBD",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: "Outfit",
+              fontWeight: "normal",
+              fontSize: 45,
+            }}
+          >
+            Why Holborn Relocate?
+          </p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: 56,
+            justifyContent: "center",
+            padding: "64px 0px 180px 0px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 476,
+            }}
+          >
+            <div>
+              <Image src="/CV.png" width={90} height={90} alt="assistance" />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Personalized Assistance
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                We cater to your individual needs, crafting customized solutions
+                to ensure a seamless and stress-free relocation experience
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 476,
+            }}
+          >
+            <div>
+              <Image src="/Goal.png" width={90} height={90} alt="assistance" />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Expert Guidance with a Global Outlook
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                Our local expertise and global perspective empower you to plan
+                strategically and size the best opportunities in Dubai
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 476,
+            }}
+          >
+            <div>
+              <Image
+                src="/Guarantee.png"
+                width={90}
+                height={90}
+                alt="assistance"
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Trusted Professionals
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                Holborn Relocate is committed to staying ahead of the latest
+                immigration regulations, providing reliable and precise support
+                every step of the way
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <div className="bg-gradient-to-r from-color_0166C8 to-color_137EE6 rounded-[16px] overflow-hidden shadow-home_hero_shadow">
-            <div className="flex items-stretch">
-              {/* Left Content Section */}
-              <div className="flex-grow p-4 lg:pl-20 lg:pr-12 lg:py-12">
-                <div className="text-[15px] lg:text-[40px] font-bold text-center lg:text-left">
-                  I’m Stephen Quinn
-                </div>
-                <div className="mt-0 lg:mt-3 text-[12px] lg:text-[22px] font-bold text-center lg:text-left">
-                  Founder & CEO
-                </div>
-                <div className="mt-3 lg:mt-5 text-[12px] lg:text-[22px] font-medium text-center lg:text-left">
-                  With 27 years in business internationally, and 19 years of
-                  utilising in LinkedIn, I bring expertise for International
-                  C-Suites & High Performing Entrepreneurs in leveraging the
-                  platform.
-                </div>
-                <div className="flex justify-center lg:justify-start">
-                  <div
-                    className="mt-6"
-                    style={{
-                      width: 233,
-                      height: 1.5,
-                      backgroundColor: "white",
-                    }}
-                  />
-                </div>
-                <div className="grid grid-cols-3 pt-4">
-                  <div className="col-span-3 lg:col-span-2 flex items-center justify-center lg:justify-start">
-                    <div className="text-[12px] lg:text-[16px] text-center lg:text-left">
-                      Unlock your potential with Stephen Quinn
-                    </div>
-                  </div>
-                  <div className="col-span-3 lg:col-span-1 flex justify-center lg:justify-end items-center mt-4 lg:mt-0">
-                    <button className="py-3 px-4 lg:px-5 lg:py-3 rounded-[10px] text-[12px] lg:text-[18px] bg-white text-black font-semibold shadow-home_button_shadow">
-                      GET STARTED
-                    </button>
-                  </div>
+      {/* Third Section Our Business Servies */}
+      <div
+        style={{
+          marginTop: 120,
+          color: "#FFFFFF",
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <p
+            style={{
+              fontFamily: "Outfit",
+              fontWeight: "normal",
+              fontSize: 40,
+            }}
+          >
+            Our business services
+          </p>
+          <p
+            style={{
+              fontFamily: "Outfit",
+              fontWeight: "normal",
+              fontSize: 30,
+            }}
+          >
+            We offer a range of expert solutions to ensure your move to Dubai is
+            smooth and hassle-free
+          </p>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: 56,
+            justifyContent: "center",
+            padding: "64px 0px 180px 0px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 353,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Visa Support
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                We specialize in simplifying the visa application process.
+                Whether you're an entrepreneur, professional, or relocating with
+                family, we ensure you meet all requirements and secure the
+                appropriate visa with ease
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 353,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Hassle-Free Relocation
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                From finding your dream home to managing school enrollments for
+                your children, we handle all the details to help you settle
+                effortlessly into Dubai’s vibrant community
+              </p>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "24px",
+              width: 353,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "bold",
+                  fontSize: 30,
+                }}
+              >
+                Corporate Solutions
+              </p>
+              <p
+                style={{
+                  fontFamily: "Outfit",
+                  fontWeight: "normal",
+                  fontSize: "22px",
+                }}
+              >
+                For businesses expanding to Dubai, we provide expert guidance on
+                corporate relocation and business setup, ensuring a smooth
+                transition to this thriving hub
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Fourth Section What our Client say? */}
+      <div
+        style={{
+          color: "#FFFFFF",
+          padding: "0px 20px",
+        }}
+      >
+        <div
+          style={{
+            border: "1px solid #ffffff",
+            borderRadius: 20,
+            padding: "60px 130px",
+            background: "linear-gradient(to bottom, #CF142B, #002470)",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <p
+              style={{
+                fontFamily: "Outfit",
+                fontWeight: "normal",
+                fontSize: 40,
+              }}
+            >
+              What Our Clients Say?
+            </p>
+            <p
+              style={{
+                fontFamily: "Outfit",
+                fontWeight: "normal",
+                fontSize: 30,
+              }}
+            >
+              Hear how we’ve transformed relocations into seamless and
+              successful experiences
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: 56,
+              justifyContent: "center",
+              padding: "64px 0px 0px 0px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "20px",
+                width: 519,
+                color: "#000000",
+                background: "#FFFFFF",
+                padding: "60px 20px 20px",
+                borderRadius: 10,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "20px",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Outfit",
+                    fontWeight: "normal",
+                    fontSize: "22px",
+                    height: 205,
+                  }}
+                >
+                  Holborn Relocate made our move to Dubai effortless. Their team
+                  handled every detail, from securing visas to finding the
+                  perfect home for my family. I couldn’t have asked for a better
+                  experience!
+                </p>
+                <div
+                  style={{ width: 299, height: 1, background: "#000000" }}
+                ></div>
+                <div>
+                  <p style={{ fontSize: 27 }}>
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Sarah Thompson,
+                    </span>
+                    Marketing Manager
+                  </p>
                 </div>
               </div>
-
-              {/* Image Section */}
-              <div className="hidden items-stretch md:flex">
-                <div className="relative w-[320px]  xl:w-[400px] h-full bg-[#D3D3D3]">
-                  <Image
-                    src="/home/quinn-man.jpeg"
-                    alt="Quinn Man"
-                    layout="fill"
-                    objectFit="contain"
-                    className="h-full"
-                  />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "20px",
+                width: 519,
+                color: "#FFFFFF",
+                background: "linear-gradient(to bottom, #002470, #CF142B)",
+                padding: "60px 20px 20px",
+                borderRadius: 10,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "24px",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Outfit",
+                    fontWeight: "normal",
+                    fontSize: "22px",
+                    height: 205,
+                  }}
+                >
+                  As an entrepreneur expanding to Dubai, I was impressed by
+                  Holborn's expertise in business setup and relocation. Their
+                  guidance made the entire process smooth and stress-free
+                </p>
+                <div
+                  style={{ width: 299, height: 1, background: "#FFFFFF" }}
+                ></div>
+                <div>
+                  <p style={{ fontSize: 27, fontWeight: "bold" }}>
+                    David Collins, CEO, TechSphere Innovations
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "24px",
+                width: 519,
+                color: "#000000",
+                background: "#FFFFFF",
+                padding: "60px 20px 20px",
+                borderRadius: 10,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "24px",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "Outfit",
+                    fontWeight: "normal",
+                    fontSize: "22px",
+                    height: 205,
+                  }}
+                >
+                  Relocating with a family seemed daunting, but Holborn Relocate
+                  took care of everything. From school enrollments to settling
+                  into our new home, their support was invaluable
+                </p>
+                <div
+                  style={{ width: 299, height: 1, background: "#000000" }}
+                ></div>
+                <div>
+                  <p style={{ fontSize: 27 }}>
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Emma Walker,
+                    </span>
+                    HR Director
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Section 2 */}
-      <div className="relative text-white">
-        <div className="hidden lg:block absolute top-[20px] right-[60px]">
-          <Image
-            src={"/home/LinkedIn.svg"}
-            layout="intrinsic"
-            width={140}
-            height={140}
-            alt="LinkedIn"
-          />
-        </div>
-
-        <div className="pt-12 pb-6 lg:pb-0">
-          <div className="text-color_174571 text-[16px] font-bold  md:text-[28px] md:font-medium text-center">
-            Why Choose Stephen Quinn?
-          </div>
-        </div>
-
-        {/* Cards */}
-        <div className="flex flex-col lg:flex-row gap-16 justify-center items-center px-4">
-          {/* Card 1 */}
-
-          {cardsData?.map((item) => {
-            return (
-              <div
-                key={item.title}
-                className={`${item.differentClassName} px-3 py-5 min-w-[245px] max-w-[245px] lg:min-w-[205px] lg:max-w-[205px] xl:min-w-[245px] xl:max-w-[245px] rounded-[10px] min-h-[200px] shadow-home_cards_shadow`}
-              >
-                <div className="flex justify-center">
-                  <Image
-                    src={item.imageSrc}
-                    layout="intrinsic"
-                    width={50}
-                    height={50}
-                    alt={item.title}
-                  />
-                </div>
-                <div className="text-[17.5px] lg:text-[14px] xl:text-[17.5px] mt-3 text-center">
-                  {item.title}
-                </div>
-                <div className="text-[13px] lg:text-[11px] xl:text-[13px] mt-6 text-center">
-                  {item.description}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="pb-12"></div>
     </div>
   );
 }

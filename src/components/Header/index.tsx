@@ -2,6 +2,7 @@
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { useState } from "react";
+import "./header.css";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,35 +15,42 @@ export default function Header() {
     <div>
       <div className="relative">
         {/* Fixed Header */}
-        <div className="bg-color_003262 pl-4 lg:pl-8 pr-5 lg:pr-16 flex items-center justify-between 2xl:static fixed top-0 left-0  w-full z-40">
+        <div className="pl-4 lg:pl-8 pr-5 lg:pr-16 lg:pt-8 flex items-center justify-between 2xl:static absolute top-0 left-0  w-full z-40">
           {/* Logo Section */}
           <Link href={"/"}>
             <div className="flex flex-col justify-center items-center">
-              <Image
-                src="/logo-dark.svg"
-                height={100}
-                width={150}
-                alt="Quinn"
-              />
+              <Image src="/logo.png" height={100} width={150} alt="Quinn" />
             </div>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex gap-x-5 text-white justify-end">
             <div>
-              <Link href={"/"}>Home</Link>
+              <Link href={"/"} className="rounded-red-btn">
+                Business Setup
+              </Link>
             </div>
             <div>
-              <Link href={"/Services"}>Services</Link>
+              <Link href={"/Services"}>Residency Visa</Link>
             </div>
             <div>
-              <Link href={"/Testimonials"}>Testimonials</Link>
+              <Link href={"/Testimonials"}>Bussiness Services</Link>
             </div>
             <div>
-              <Link href={"/BookMeeting"}>Book a meeting</Link>
+              <Link href={"/BookMeeting"}>Bussiness Setup</Link>
             </div>
             <div>
-              <Link href={"/LetsConnect"}>Contact Us</Link>
+              <Link href={"/BookMeeting"}>Resources</Link>
+            </div>
+            <div>
+              <Link href={"/LetsConnect"} className="rounded-white-btn">
+                Contact Us
+              </Link>
+            </div>
+            <div>
+              <Link href={"/LetsConnect"} className="rounded-red-btn">
+                Schedule a Meeting
+              </Link>
             </div>
           </div>
 

@@ -1,0 +1,11 @@
+.rounded-red-btn {
+  background-color: #cf142b;
+  padding: 14px 10px;
+  border-radius: 15px;
+}
+.rounded-white-btn {
+  background-color: #ffffff;
+  padding: 14px 10px;
+  border-radius: 15px;
+  color: #000000;
+}
