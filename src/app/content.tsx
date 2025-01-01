@@ -34,7 +34,7 @@ export default function Home() {
             <div>
               <button>Our Services</button>
               <button>
-                Book a meeting{" "}
+                Book a meeting
                 <span style={{ fontSize: 35, color: "#FFFFFF" }}>&#8594;</span>
               </button>
             </div>
