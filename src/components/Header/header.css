@@ -2,10 +2,14 @@
   background-color: #cf142b;
   padding: 14px 10px;
   border-radius: 15px;
+  font-size: 22px;
+  font-weight: bold;
 }
 .rounded-white-btn {
   background-color: #ffffff;
   padding: 14px 10px;
   border-radius: 15px;
   color: #000000;
+  font-size: 22px;
+  font-weight: bold;
 }

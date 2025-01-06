@@ -30,6 +30,7 @@ body {
   padding: 14px 10px;
   font-size: 22px;
   font-weight: bold;
+  border-radius: 5px;
 }
 .rounded-white-btn {
   background-color: #ffffff;

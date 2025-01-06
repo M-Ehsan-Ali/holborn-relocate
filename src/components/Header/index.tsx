@@ -19,7 +19,13 @@ export default function Header() {
           {/* Logo Section */}
           <Link href={"/"}>
             <div className="flex flex-col justify-center items-center">
-              <Image src="/logo.png" height={100} width={150} alt="Quinn" />
+              <Image
+                src="/logo.png"
+                height={100}
+                width={150}
+                alt="holborn"
+                loading="lazy"
+              />
             </div>
           </Link>
 
