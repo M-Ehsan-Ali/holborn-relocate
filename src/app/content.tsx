@@ -145,6 +145,19 @@ export default function Home() {
             smooth and hassle-free
           </p>
         </div>
+        <div className="flex justify-center items-center mt-[100px]">
+          <div className="w-[150px] h-[150px] rounded-full bg-[#CF142B] flex justify-center items-center">
+            <p className="text-[50px] font-outfit font-bold">01</p>
+          </div>
+          <div className="w-[330px] h-[1px] bg-white"></div>
+          <div className="w-[150px] h-[150px] rounded-full bg-[#CF142B] flex justify-center items-center">
+            <p className="text-[50px] font-outfit font-bold">02</p>
+          </div>
+          <div className="w-[330px] h-[1px] bg-white"></div>
+          <div className="w-[150px] h-[150px] rounded-full bg-[#CF142B] flex justify-center items-center">
+            <p className="text-[50px] font-outfit font-bold">03</p>
+          </div>
+        </div>
         <div className="flex gap-[56px] justify-center py-[64px] pb-[180px]">
           <div className="flex flex-col items-center gap-[24px] w-[353px]">
             <div className="flex flex-col items-center gap-[24px] text-center">
