@@ -40,21 +40,21 @@ export default function Header() {
               <Link href={"/ResidencyVisa"}>Residency Visa</Link>
             </div>
             <div>
-              <Link href={"/Testimonials"}>Bussiness Services</Link>
+              <Link href={"/businessServices"}>Bussiness Services</Link>
             </div>
             <div>
-              <Link href={"/BookMeeting"}>Bussiness Setup</Link>
+              <Link href={"/businessSetup"}>Bussiness Setup</Link>
             </div>
             <div>
-              <Link href={"/BookMeeting"}>Resources</Link>
+              <Link href={"/resource"}>Resources</Link>
             </div>
             <div>
-              <Link href={"/LetsConnect"} className="rounded-white-btn">
+              <Link href={"/contactUs"} className="rounded-white-btn">
                 Contact Us
               </Link>
             </div>
             <div>
-              <Link href={"/LetsConnect"} className="rounded-red-btn">
+              <Link href={"/schedulMeeting"} className="rounded-red-btn">
                 Schedule a Meeting
               </Link>
             </div>
@@ -93,21 +93,21 @@ export default function Header() {
             </div>
             <div className="w-[150px] h-[1px] bg-black" />
             <div className="font-semibold py-3">
-              <Link href={"/Testimonials"} onClick={handleMenuClick}>
-                Testimonials
+              <Link href={"/businessServices"} onClick={handleMenuClick}>
+                Bussiness Service
               </Link>
             </div>
             <div className="w-[150px] h-[1px] bg-black" />
 
             <div className="font-semibold py-3">
-              <Link href={"/BookMeeting"} onClick={handleMenuClick}>
+              <Link href={"/schedulMeeting"} onClick={handleMenuClick}>
                 Book a meeting
               </Link>
             </div>
             <div className="w-[150px] h-[1px] bg-black" />
 
             <div className="font-semibold py-3">
-              <Link href={"/LetsConnect"} onClick={handleMenuClick}>
+              <Link href={"/contactUs"} onClick={handleMenuClick}>
                 Contact Us
               </Link>
             </div>
