@@ -13,7 +13,7 @@ export default function Header() {
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative z-[9]">
         {/* Fixed Header */}
         <div className="pl-4 lg:pl-8 pr-5 lg:pr-16 lg:pt-8 flex items-center justify-between 2xl:static absolute top-0 left-0  w-full z-40">
           {/* Logo Section */}
@@ -37,7 +37,7 @@ export default function Header() {
               </Link>
             </div>
             <div>
-              <Link href={"/Services"}>Residency Visa</Link>
+              <Link href={"/ResidencyVisa"}>Residency Visa</Link>
             </div>
             <div>
               <Link href={"/Testimonials"}>Bussiness Services</Link>
@@ -87,8 +87,8 @@ export default function Header() {
             </div>
             <div className="w-[150px] h-[1px] bg-black" />
             <div className="font-semibold py-3">
-              <Link href={"/Services"} onClick={handleMenuClick}>
-                Services
+              <Link href={"/ResidencyVisa"} onClick={handleMenuClick}>
+                Residency Visa
               </Link>
             </div>
             <div className="w-[150px] h-[1px] bg-black" />

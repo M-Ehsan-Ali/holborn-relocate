@@ -1,4 +1,4 @@
-import Services from "./content";
+import ResidencyVisa from "./content";
 
 export default function MainPage() {
   return (
@@ -12,7 +12,7 @@ export default function MainPage() {
 
       // }}
       >
-        <Services />
+        <ResidencyVisa />
       </div>
     </>
   );
