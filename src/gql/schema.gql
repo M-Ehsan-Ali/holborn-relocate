@@ -3,6 +3,349 @@ schema {
   mutation: RootMutation
 }
 
+"""The Abc type"""
+type Abc implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
+  """The id field matches the WP_Post-&gt;ID field."""
+  abcId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """The ancestors of the content node."""
+  ancestors(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): AbcToAbcConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The content of the post."""
+  content(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  Connection between the NodeWithFeaturedImage type and the MediaItem type
+  """
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  """
+  The database identifier for the featured image node assigned to the content node
+  """
+  featuredImageDatabaseId: Int
+
+  """Globally unique ID of the featured image assigned to the node"""
+  featuredImageId: ID
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """Whether the abc object is password protected."""
+  hasPassword: Boolean
+
+  """The globally unique identifier of the abc object."""
+  id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Abc name&quot; was set to Show in GraphQL.
+  """
+  name: Abc_Name
+
+  """The parent of the content node."""
+  parent: AbcToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the abc object."""
+  password: String
+
+  """Connection between the Abc type and the Abc type"""
+  preview: AbcToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""Connection to Abc Nodes"""
+interface AbcConnection implements Connection {
+  """
+  A list of edges (relational context) between RootQuery and connected Abc Nodes
+  """
+  edges: [AbcConnectionEdge!]!
+
+  """A list of connected Abc Nodes"""
+  nodes: [Abc!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: AbcConnectionPageInfo!
+}
+
+"""Edge between a Node and a connected Abc"""
+interface AbcConnectionEdge implements Edge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The connected Abc Node"""
+  node: Abc!
+}
+
+"""Page Info on the connected AbcConnectionEdge"""
+interface AbcConnectionPageInfo implements PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum AbcIdType {
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""Connection between the Abc type and the Abc type"""
+type AbcToAbcConnection implements AbcConnection & Connection {
+  """Edges for the AbcToAbcConnection connection"""
+  edges: [AbcToAbcConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Abc!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: AbcToAbcConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type AbcToAbcConnectionEdge implements AbcConnectionEdge & Edge {
+  """A cursor for use in pagination"""
+  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The item at the end of the edge"""
+  node: Abc! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+}
+
+"""Page Info on the &quot;AbcToAbcConnection&quot;"""
+type AbcToAbcConnectionPageInfo implements AbcConnectionPageInfo & PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Connection between the Abc type and the Abc type"""
+type AbcToParentConnectionEdge implements AbcConnectionEdge & Edge & OneToOneConnection {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Abc! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+}
+
+"""Connection between the Abc type and the Abc type"""
+type AbcToPreviewConnectionEdge implements AbcConnectionEdge & Edge & OneToOneConnection {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Abc!
+}
+
+"""Field Group"""
+type Abc_Name implements AcfFieldGroup {
+  """"""
+  designation: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  logo: MediaItem
+
+  """"""
+  name: String
+
+  """"""
+  review: String
+}
+
 """A Field Group registered by ACF"""
 interface AcfFieldGroup {
   """The name of the ACF Field Group"""
@@ -187,11 +530,20 @@ type Category implements DatabaseIdentifier & HierarchicalNode & HierarchicalTer
     last: Int
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -563,7 +915,7 @@ input CategoryToContentNodeConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -756,7 +1108,7 @@ input CategoryToPostConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -863,88 +1215,8 @@ type CategoryToTaxonomyConnectionEdge implements Edge & OneToOneConnection & Tax
   node: Taxonomy!
 }
 
-"""The coblocksAnimationControlsEnabled setting type"""
-type CoblocksAnimationControlsEnabledSettings {
-  """Setting use to disable or enable animation controls across the site."""
-  coblocksAnimationControlsEnabled: Boolean
-}
-
-"""The coblocksColorPanelControlsEnabled setting type"""
-type CoblocksColorPanelControlsEnabledSettings {
-  """Setting use to disable or enable all color controls across the site."""
-  coblocksColorPanelControlsEnabled: Boolean
-}
-
-"""The coblocksCustomColorsControlsEnabled setting type"""
-type CoblocksCustomColorsControlsEnabledSettings {
-  """
-  Setting use to disable or enable custom color controls across the site.
-  """
-  coblocksCustomColorsControlsEnabled: Boolean
-}
-
-"""The coblocksGoogleMapsApiKey setting type"""
-type CoblocksGoogleMapsApiKeySettings {
-  """Google Map API key for map rendering"""
-  coblocksGoogleMapsApiKey: String
-}
-
-"""The coblocksGoogleRecaptchaSecretKey setting type"""
-type CoblocksGoogleRecaptchaSecretKeySettings {
-  """Google reCaptcha secret key for form spam protection"""
-  coblocksGoogleRecaptchaSecretKey: String
-}
-
-"""The coblocksGoogleRecaptchaSiteKey setting type"""
-type CoblocksGoogleRecaptchaSiteKeySettings {
-  """Google reCaptcha site key for form spam protection"""
-  coblocksGoogleRecaptchaSiteKey: String
-}
-
-"""The coblocksGradientPresetsEnabled setting type"""
-type CoblocksGradientPresetsEnabledSettings {
-  """
-  Setting use to disable or enable gradient controls and presets across the site.
-  """
-  coblocksGradientPresetsEnabled: Boolean
-}
-
-"""The coblocksLayoutSelectorControlsEnabled setting type"""
-type CoblocksLayoutSelectorControlsEnabledSettings {
-  """
-  Setting use to disable or enable layout selector controls across the site.
-  """
-  coblocksLayoutSelectorControlsEnabled: Boolean
-}
-
-"""The coblocksSiteContentControlsEnabled setting type"""
-type CoblocksSiteContentControlsEnabledSettings {
-  """
-  Setting use to disable or enable custom color controls across the site.
-  """
-  coblocksSiteContentControlsEnabled: Boolean
-}
-
-"""The coblocksSiteDesignControlsEnabled setting type"""
-type CoblocksSiteDesignControlsEnabledSettings {
-  """Setting use to disable or enable typography controls across the site."""
-  coblocksSiteDesignControlsEnabled: Boolean
-}
-
-"""The coblocksTypographyControlsEnabled setting type"""
-type CoblocksTypographyControlsEnabledSettings {
-  """Setting use to disable or enable typography controls across the site."""
-  coblocksTypographyControlsEnabled: Boolean
-}
-
-"""The template assigned to the node"""
-type ComingSoonTemplate implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
-}
-
 """A Comment object"""
-type Comment implements DatabaseIdentifier & Node {
+type Comment implements DatabaseIdentifier & Node & UniformResourceIdentifiable {
   """
   User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL.
   """
@@ -959,9 +1231,9 @@ type Comment implements DatabaseIdentifier & Node {
   author: CommentToCommenterConnectionEdge
 
   """
-  IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+  IP address for the author at the time of commenting. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
   """
-  authorIp: String
+  authorIp: String @deprecated(reason: "Use the ipAddress field on the edge between the comment and author")
 
   """ID for the comment, unique among comments."""
   commentId: Int @deprecated(reason: "Deprecated in favor of databaseId")
@@ -993,13 +1265,31 @@ type Comment implements DatabaseIdentifier & Node {
   """The globally unique identifier for the comment object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
 
   """
   Karma value for the comment. This field is equivalent to WP_Comment-&gt;comment_karma and the value matching the &quot;comment_karma&quot; column in SQL.
   """
   karma: Int
+
+  """The permalink of the comment"""
+  link: String
 
   """Connection between the Comment type and the Comment type"""
   parent(
@@ -1046,6 +1336,9 @@ type Comment implements DatabaseIdentifier & Node {
   Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL.
   """
   type: String
+
+  """The unique resource identifier path"""
+  uri: String
 }
 
 """A Comment Author object"""
@@ -1304,8 +1597,22 @@ type CommentToCommenterConnectionEdge implements CommenterConnectionEdge & Edge 
   """
   cursor: String
 
+  """The email address representing the author for this particular comment"""
+  email: String
+
+  """
+  IP address of the author at the time of making this comment. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL.
+  """
+  ipAddress: String
+
+  """The display name of the comment author for this particular comment"""
+  name: String
+
   """The node of the connection, without the edges"""
   node: Commenter!
+
+  """The url entered for the comment author on this particular comment"""
+  url: String
 }
 
 """Connection between the Comment type and the ContentNode type"""
@@ -1609,11 +1916,20 @@ interface ContentNode implements Node & UniformResourceIdentifiable {
   """
   guid: String
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -1920,6 +2236,9 @@ type ContentType implements Node & UniformResourceIdentifiable {
   """The globally unique identifier of the post-type object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
 
@@ -2048,7 +2367,13 @@ interface ContentTypeConnectionPageInfo implements PageInfo & WPPageInfo {
 """Allowed Content Types"""
 enum ContentTypeEnum {
   """The Type of Content object"""
+  ABC
+
+  """The Type of Content object"""
   ATTACHMENT
+
+  """The Type of Content object"""
+  NEWS
 
   """The Type of Content object"""
   PAGE
@@ -2057,7 +2382,10 @@ enum ContentTypeEnum {
   POST
 
   """The Type of Content object"""
-  WP_TESTIMONIAL
+  PROJECTS
+
+  """The Type of Content object"""
+  TESTIMONIALS
 }
 
 """
@@ -2148,7 +2476,7 @@ input ContentTypeToContentNodeConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -2283,6 +2611,50 @@ enum ContentTypesOfPostFormatEnum {
 enum ContentTypesOfTagEnum {
   """The Type of Content object"""
   POST
+}
+
+"""Input for the createAbc mutation."""
+input CreateAbcInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createAbc mutation."""
+type CreateAbcPayload {
+  """The Post object mutation type."""
+  abc: Abc
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
 }
 
 """Input for the createCategory mutation."""
@@ -2436,6 +2808,50 @@ type CreateMediaItemPayload {
 
   """The MediaItem object mutation type."""
   mediaItem: MediaItem
+}
+
+"""Input for the createNew mutation."""
+input CreateNewInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createNew mutation."""
+type CreateNewPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  new: New
 }
 
 """Input for the createPage mutation."""
@@ -2595,6 +3011,50 @@ type CreatePostPayload {
   post: Post
 }
 
+"""Input for the createProject mutation."""
+input CreateProjectInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createProject mutation."""
+type CreateProjectPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  project: Project
+}
+
 """Input for the createTag mutation."""
 input CreateTagInput {
   """The slug that the post_tag will be an alias of"""
@@ -2626,6 +3086,50 @@ type CreateTagPayload {
 
   """The created post_tag"""
   tag: Tag
+}
+
+"""Input for the createTestimonial mutation."""
+input CreateTestimonialInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the createTestimonial mutation."""
+type CreateTestimonialPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  testimonial: Testimonial
 }
 
 """Input for the createUser mutation."""
@@ -2704,50 +3208,6 @@ type CreateUserPayload {
   user: User
 }
 
-"""Input for the createWpTestimonial mutation."""
-input CreateWpTestimonialInput {
-  """
-  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """The content of the object"""
-  content: String
-
-  """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
-  """
-  date: String
-
-  """
-  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
-  """
-  menuOrder: Int
-
-  """The password used to protect the content of the object"""
-  password: String
-
-  """The slug of the object"""
-  slug: String
-
-  """The status of the object"""
-  status: PostStatusEnum
-
-  """The title of the object"""
-  title: String
-}
-
-"""The payload for the createWpTestimonial mutation."""
-type CreateWpTestimonialPayload {
-  """
-  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """The Post object mutation type."""
-  wpTestimonial: WpTestimonial
-}
-
 """Object that can be identified with a Database ID"""
 interface DatabaseIdentifier {
   """The unique identifier stored in the database"""
@@ -2814,6 +3274,39 @@ type DefaultTemplate implements ContentTemplate {
   templateName: String
 }
 
+"""Input for the deleteAbc mutation."""
+input DeleteAbcInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the Abc to delete"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+}
+
+"""The payload for the deleteAbc mutation."""
+type DeleteAbcPayload {
+  """The object before it was deleted"""
+  abc: Abc
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+}
+
 """Input for the deleteCategory mutation."""
 input DeleteCategoryInput {
   """
@@ -2827,7 +3320,7 @@ input DeleteCategoryInput {
 
 """The payload for the deleteCategory mutation."""
 type DeleteCategoryPayload {
-  """The deteted term object"""
+  """The deleted term object"""
   category: Category
 
   """
@@ -2899,6 +3392,39 @@ type DeleteMediaItemPayload {
   mediaItem: MediaItem
 }
 
+"""Input for the deleteNew mutation."""
+input DeleteNewInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the New to delete"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+}
+
+"""The payload for the deleteNew mutation."""
+type DeleteNewPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+
+  """The object before it was deleted"""
+  new: New
+}
+
 """Input for the deletePage mutation."""
 input DeletePageInput {
   """
@@ -2953,7 +3479,7 @@ type DeletePostFormatPayload {
   """The ID of the deleted object"""
   deletedId: ID
 
-  """The deteted term object"""
+  """The deleted term object"""
   postFormat: PostFormat
 }
 
@@ -2990,6 +3516,39 @@ type DeletePostPayload {
   post: Post
 }
 
+"""Input for the deleteProject mutation."""
+input DeleteProjectInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the Project to delete"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+}
+
+"""The payload for the deleteProject mutation."""
+type DeleteProjectPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+
+  """The object before it was deleted"""
+  project: Project
+}
+
 """Input for the deleteTag mutation."""
 input DeleteTagInput {
   """
@@ -3011,8 +3570,41 @@ type DeleteTagPayload {
   """The ID of the deleted object"""
   deletedId: ID
 
-  """The deteted term object"""
+  """The deleted term object"""
   tag: Tag
+}
+
+"""Input for the deleteTestimonial mutation."""
+input DeleteTestimonialInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """
+  Whether the object should be force deleted instead of being moved to the trash
+  """
+  forceDelete: Boolean
+
+  """The ID of the Testimonial to delete"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+}
+
+"""The payload for the deleteTestimonial mutation."""
+type DeleteTestimonialPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The ID of the deleted object"""
+  deletedId: ID
+
+  """The object before it was deleted"""
+  testimonial: Testimonial
 }
 
 """Input for the deleteUser mutation."""
@@ -3043,39 +3635,6 @@ type DeleteUserPayload {
   user: User
 }
 
-"""Input for the deleteWpTestimonial mutation."""
-input DeleteWpTestimonialInput {
-  """
-  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """
-  Whether the object should be force deleted instead of being moved to the trash
-  """
-  forceDelete: Boolean
-
-  """The ID of the WpTestimonial to delete"""
-  id: ID!
-
-  """Override the edit lock when another user is editing the post"""
-  ignoreEditLock: Boolean
-}
-
-"""The payload for the deleteWpTestimonial mutation."""
-type DeleteWpTestimonialPayload {
-  """
-  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """The ID of the deleted object"""
-  deletedId: ID
-
-  """The object before it was deleted"""
-  wpTestimonial: WpTestimonial
-}
-
 """The discussion setting type"""
 type DiscussionSettings {
   """Allow people to submit comments on new posts."""
@@ -3100,14 +3659,25 @@ interface Edge {
 
 """Asset enqueued by the CMS"""
 interface EnqueuedAsset {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedAsset]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
 
   """The handle of the enqueued asset"""
   handle: String
@@ -3124,25 +3694,42 @@ interface EnqueuedAsset {
 
 """Script enqueued by the CMS"""
 type EnqueuedScript implements EnqueuedAsset & Node {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
   dependencies: [EnqueuedScript]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
+
+  """Extra data supplied to the enqueued script"""
+  extraData: String
 
   """The handle of the enqueued asset"""
   handle: String
 
-  """The ID of the enqueued asset"""
+  """The global ID of the enqueued script"""
   id: ID!
 
   """The source of the asset"""
   src: String
 
-  """The version of the enqueued asset"""
+  """The loading strategy to use on the script tag"""
+  strategy: ScriptLoadingStrategyEnum
+
+  """The version of the enqueued script"""
   version: String
 }
 
@@ -3193,25 +3780,58 @@ interface EnqueuedScriptConnectionPageInfo implements PageInfo & WPPageInfo {
 
 """Stylesheet enqueued by the CMS"""
 type EnqueuedStylesheet implements EnqueuedAsset & Node {
-  """@todo"""
-  args: Boolean
+  """The inline code to be run after the asset is loaded."""
+  after: [String]
+
+  """Deprecated"""
+  args: Boolean @deprecated(reason: "Use `EnqueuedAsset.media` instead.")
+
+  """The inline code to be run before the asset is loaded."""
+  before: [String]
+
+  """
+  The HTML conditional comment for the enqueued asset. E.g. IE 6, lte IE 7, etc
+  """
+  conditional: String
 
   """Dependencies needed to use this asset"""
-  dependencies: [EnqueuedScript]
+  dependencies: [EnqueuedStylesheet]
 
   """Extra information needed for the script"""
-  extra: String
+  extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
 
   """The handle of the enqueued asset"""
   handle: String
 
-  """The ID of the enqueued asset"""
+  """The global ID of the enqueued stylesheet"""
   id: ID!
+
+  """Whether the enqueued style is RTL or not"""
+  isRtl: Boolean
+
+  """The media attribute to use for the link"""
+  media: String
+
+  """
+  The absolute path to the enqueued style. Set when the stylesheet is meant to load inline.
+  """
+  path: String
+
+  """The `rel` attribute to use for the link"""
+  rel: String
 
   """The source of the asset"""
   src: String
 
-  """The version of the enqueued asset"""
+  """Optional suffix, used in combination with RTL"""
+  suffix: String
+
+  """
+  The title of the enqueued style. Used for preferred/alternate stylesheets.
+  """
+  title: String
+
+  """The version of the enqueued style"""
   version: String
 }
 
@@ -3414,8 +4034,17 @@ interface HierarchicalContentNode implements ContentNode & DatabaseIdentifier & 
   """The globally unique ID for the object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -3555,7 +4184,7 @@ input HierarchicalContentNodeToContentNodeAncestorsConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -3716,7 +4345,7 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -3874,8 +4503,17 @@ interface HierarchicalTermNode implements DatabaseIdentifier & HierarchicalNode 
   """The globally unique ID for the object"""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -4116,11 +4754,23 @@ type MediaItem implements ContentNode & DatabaseIdentifier & HierarchicalContent
   """
   guid: String
 
+  """Whether the attachment object is password protected."""
+  hasPassword: Boolean
+
   """The globally unique identifier of the attachment object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -4170,6 +4820,9 @@ type MediaItem implements ContentNode & DatabaseIdentifier & HierarchicalContent
 
   """The globally unique identifier of the parent node."""
   parentId: ID
+
+  """The password for the attachment object."""
+  password: String
 
   """The database id of the preview node"""
   previewRevisionDatabaseId: Int
@@ -4328,36 +4981,6 @@ type MediaItemMeta {
 
 """The size of the media item object."""
 enum MediaItemSizeEnum {
-  """MediaItem with the consulting-image-50x50-croped size"""
-  CONSULTING_IMAGE_50X50_CROPED
-
-  """MediaItem with the consulting-image-255x182-croped size"""
-  CONSULTING_IMAGE_255X182_CROPED
-
-  """MediaItem with the consulting-image-320x320-croped size"""
-  CONSULTING_IMAGE_320X320_CROPED
-
-  """MediaItem with the consulting-image-350x195-croped size"""
-  CONSULTING_IMAGE_350X195_CROPED
-
-  """MediaItem with the consulting-image-350x204-croped size"""
-  CONSULTING_IMAGE_350X204_CROPED
-
-  """MediaItem with the consulting-image-350x250-croped size"""
-  CONSULTING_IMAGE_350X250_CROPED
-
-  """MediaItem with the consulting-image-358x250-cropped size"""
-  CONSULTING_IMAGE_358X250_CROPPED
-
-  """MediaItem with the consulting-image-900w size"""
-  CONSULTING_IMAGE_900W
-
-  """MediaItem with the consulting-image-900x640-croped size"""
-  CONSULTING_IMAGE_900X640_CROPED
-
-  """MediaItem with the consulting-image-1110x550-croped size"""
-  CONSULTING_IMAGE_1110X550_CROPED
-
   """MediaItem with the large size"""
   LARGE
 
@@ -4366,6 +4989,12 @@ enum MediaItemSizeEnum {
 
   """MediaItem with the medium_large size"""
   MEDIUM_LARGE
+
+  """MediaItem with the popularis-ecommerce-img size"""
+  POPULARIS_ECOMMERCE_IMG
+
+  """MediaItem with the post-thumbnail size"""
+  POST_THUMBNAIL
 
   """MediaItem with the thumbnail size"""
   THUMBNAIL
@@ -4790,11 +5419,20 @@ interface MenuItemLinkable implements DatabaseIdentifier & Node & UniformResourc
   """The unique identifier stored in the database"""
   databaseId: Int!
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the node is a Term"""
   isTermNode: Boolean!
@@ -4826,7 +5464,7 @@ enum MenuItemNodeIdTypeEnum {
 }
 
 """Deprecated in favor of MenuItemLinkeable Interface"""
-union MenuItemObjectUnion = Category | Page | Post | Tag | WpTestimonial
+union MenuItemObjectUnion = Abc | Category | New | Page | Post | Project | Tag | Testimonial
 
 """Connection between the MenuItem type and the Menu type"""
 type MenuItemToMenuConnectionEdge implements Edge & MenuConnectionEdge & OneToOneConnection {
@@ -4908,17 +5546,8 @@ type MenuItemToMenuItemLinkableConnectionEdge implements Edge & MenuItemLinkable
 
 """Registered menu locations"""
 enum MenuLocationEnum {
-  """Put the menu in the consulting-primary_menu location"""
-  CONSULTING_PRIMARY_MENU
-
-  """Put the menu in the consulting-sidebar_menu_1 location"""
-  CONSULTING_SIDEBAR_MENU_1
-
-  """Put the menu in the consulting-sidebar_menu_2 location"""
-  CONSULTING_SIDEBAR_MENU_2
-
-  """Put the menu in the consulting-sidebar_menu_3 location"""
-  CONSULTING_SIDEBAR_MENU_3
+  """Put the menu in the main_menu location"""
+  MAIN_MENU
 }
 
 """
@@ -5001,303 +5630,652 @@ input MenuToMenuItemConnectionWhereArgs {
 
 """The MimeType of the object"""
 enum MimeTypeEnum {
-  """MimeType application/java"""
+  """application/java mime type."""
   APPLICATION_JAVA
 
-  """MimeType application/msword"""
+  """application/msword mime type."""
   APPLICATION_MSWORD
 
-  """MimeType application/octet-stream"""
+  """application/octet-stream mime type."""
   APPLICATION_OCTET_STREAM
 
-  """MimeType application/onenote"""
+  """application/onenote mime type."""
   APPLICATION_ONENOTE
 
-  """MimeType application/oxps"""
+  """application/oxps mime type."""
   APPLICATION_OXPS
 
-  """MimeType application/pdf"""
+  """application/pdf mime type."""
   APPLICATION_PDF
 
-  """MimeType application/rar"""
+  """application/rar mime type."""
   APPLICATION_RAR
 
-  """MimeType application/rtf"""
+  """application/rtf mime type."""
   APPLICATION_RTF
 
-  """MimeType application/ttaf+xml"""
+  """application/ttaf+xml mime type."""
   APPLICATION_TTAF_XML
 
-  """MimeType application/vnd.apple.keynote"""
+  """application/vnd.apple.keynote mime type."""
   APPLICATION_VND_APPLE_KEYNOTE
 
-  """MimeType application/vnd.apple.numbers"""
+  """application/vnd.apple.numbers mime type."""
   APPLICATION_VND_APPLE_NUMBERS
 
-  """MimeType application/vnd.apple.pages"""
+  """application/vnd.apple.pages mime type."""
   APPLICATION_VND_APPLE_PAGES
 
-  """MimeType application/vnd.ms-access"""
+  """application/vnd.ms-access mime type."""
   APPLICATION_VND_MS_ACCESS
 
-  """MimeType application/vnd.ms-excel"""
+  """application/vnd.ms-excel mime type."""
   APPLICATION_VND_MS_EXCEL
 
-  """MimeType application/vnd.ms-excel.addin.macroEnabled.12"""
+  """application/vnd.ms-excel.addin.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_ADDIN_MACROENABLED_12
 
-  """MimeType application/vnd.ms-excel.sheet.binary.macroEnabled.12"""
+  """application/vnd.ms-excel.sheet.binary.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_SHEET_BINARY_MACROENABLED_12
 
-  """MimeType application/vnd.ms-excel.sheet.macroEnabled.12"""
+  """application/vnd.ms-excel.sheet.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_SHEET_MACROENABLED_12
 
-  """MimeType application/vnd.ms-excel.template.macroEnabled.12"""
+  """application/vnd.ms-excel.template.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_EXCEL_TEMPLATE_MACROENABLED_12
 
-  """MimeType application/vnd.ms-powerpoint"""
+  """application/vnd.ms-powerpoint mime type."""
   APPLICATION_VND_MS_POWERPOINT
 
-  """MimeType application/vnd.ms-powerpoint.addin.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.addin.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_ADDIN_MACROENABLED_12
 
-  """MimeType application/vnd.ms-powerpoint.presentation.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.presentation.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_PRESENTATION_MACROENABLED_12
 
-  """MimeType application/vnd.ms-powerpoint.slideshow.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.slideshow.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_SLIDESHOW_MACROENABLED_12
 
-  """MimeType application/vnd.ms-powerpoint.slide.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.slide.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_SLIDE_MACROENABLED_12
 
-  """MimeType application/vnd.ms-powerpoint.template.macroEnabled.12"""
+  """application/vnd.ms-powerpoint.template.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_POWERPOINT_TEMPLATE_MACROENABLED_12
 
-  """MimeType application/vnd.ms-project"""
+  """application/vnd.ms-project mime type."""
   APPLICATION_VND_MS_PROJECT
 
-  """MimeType application/vnd.ms-word.document.macroEnabled.12"""
+  """application/vnd.ms-word.document.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_WORD_DOCUMENT_MACROENABLED_12
 
-  """MimeType application/vnd.ms-word.template.macroEnabled.12"""
+  """application/vnd.ms-word.template.macroEnabled.12 mime type."""
   APPLICATION_VND_MS_WORD_TEMPLATE_MACROENABLED_12
 
-  """MimeType application/vnd.ms-write"""
+  """application/vnd.ms-write mime type."""
   APPLICATION_VND_MS_WRITE
 
-  """MimeType application/vnd.ms-xpsdocument"""
+  """application/vnd.ms-xpsdocument mime type."""
   APPLICATION_VND_MS_XPSDOCUMENT
 
-  """MimeType application/vnd.oasis.opendocument.chart"""
+  """application/vnd.oasis.opendocument.chart mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_CHART
 
-  """MimeType application/vnd.oasis.opendocument.database"""
+  """application/vnd.oasis.opendocument.database mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_DATABASE
 
-  """MimeType application/vnd.oasis.opendocument.formula"""
+  """application/vnd.oasis.opendocument.formula mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_FORMULA
 
-  """MimeType application/vnd.oasis.opendocument.graphics"""
+  """application/vnd.oasis.opendocument.graphics mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_GRAPHICS
 
-  """MimeType application/vnd.oasis.opendocument.presentation"""
+  """application/vnd.oasis.opendocument.presentation mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_PRESENTATION
 
-  """MimeType application/vnd.oasis.opendocument.spreadsheet"""
+  """application/vnd.oasis.opendocument.spreadsheet mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_SPREADSHEET
 
-  """MimeType application/vnd.oasis.opendocument.text"""
+  """application/vnd.oasis.opendocument.text mime type."""
   APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.presentation
+  application/vnd.openxmlformats-officedocument.presentationml.presentation mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_PRESENTATION
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.slide
+  application/vnd.openxmlformats-officedocument.presentationml.slide mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDE
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.slideshow
+  application/vnd.openxmlformats-officedocument.presentationml.slideshow mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_SLIDESHOW
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.presentationml.template
+  application/vnd.openxmlformats-officedocument.presentationml.template mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_PRESENTATIONML_TEMPLATE
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_SHEET
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.spreadsheetml.template
+  application/vnd.openxmlformats-officedocument.spreadsheetml.template mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_SPREADSHEETML_TEMPLATE
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  application/vnd.openxmlformats-officedocument.wordprocessingml.document mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT
 
   """
-  MimeType application/vnd.openxmlformats-officedocument.wordprocessingml.template
+  application/vnd.openxmlformats-officedocument.wordprocessingml.template mime type.
   """
   APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_TEMPLATE
 
-  """MimeType application/wordperfect"""
+  """application/wordperfect mime type."""
   APPLICATION_WORDPERFECT
 
-  """MimeType application/x-7z-compressed"""
+  """application/x-7z-compressed mime type."""
   APPLICATION_X_7Z_COMPRESSED
 
-  """MimeType application/x-gzip"""
+  """application/x-gzip mime type."""
   APPLICATION_X_GZIP
 
-  """MimeType application/x-tar"""
+  """application/x-tar mime type."""
   APPLICATION_X_TAR
 
-  """MimeType application/zip"""
+  """application/zip mime type."""
   APPLICATION_ZIP
 
-  """MimeType audio/aac"""
+  """audio/aac mime type."""
   AUDIO_AAC
 
-  """MimeType audio/flac"""
+  """audio/flac mime type."""
   AUDIO_FLAC
 
-  """MimeType audio/midi"""
+  """audio/midi mime type."""
   AUDIO_MIDI
 
-  """MimeType audio/mpeg"""
+  """audio/mpeg mime type."""
   AUDIO_MPEG
 
-  """MimeType audio/ogg"""
+  """audio/ogg mime type."""
   AUDIO_OGG
 
-  """MimeType audio/wav"""
+  """audio/wav mime type."""
   AUDIO_WAV
 
-  """MimeType audio/x-matroska"""
+  """audio/x-matroska mime type."""
   AUDIO_X_MATROSKA
 
-  """MimeType audio/x-ms-wax"""
+  """audio/x-ms-wax mime type."""
   AUDIO_X_MS_WAX
 
-  """MimeType audio/x-ms-wma"""
+  """audio/x-ms-wma mime type."""
   AUDIO_X_MS_WMA
 
-  """MimeType audio/x-realaudio"""
+  """audio/x-realaudio mime type."""
   AUDIO_X_REALAUDIO
 
-  """MimeType image/avif"""
+  """image/avif mime type."""
   IMAGE_AVIF
 
-  """MimeType image/bmp"""
+  """image/bmp mime type."""
   IMAGE_BMP
 
-  """MimeType image/gif"""
+  """image/gif mime type."""
   IMAGE_GIF
 
-  """MimeType image/heic"""
+  """image/heic mime type."""
   IMAGE_HEIC
 
-  """MimeType image/heic-sequence"""
+  """image/heic-sequence mime type."""
   IMAGE_HEIC_SEQUENCE
 
-  """MimeType image/heif"""
+  """image/heif mime type."""
   IMAGE_HEIF
 
-  """MimeType image/heif-sequence"""
+  """image/heif-sequence mime type."""
   IMAGE_HEIF_SEQUENCE
 
-  """MimeType image/icon"""
-  IMAGE_ICON
-
-  """MimeType image/jpeg"""
+  """image/jpeg mime type."""
   IMAGE_JPEG
 
-  """MimeType image/png"""
+  """image/png mime type."""
   IMAGE_PNG
 
-  """MimeType image/svg+xml"""
-  IMAGE_SVG_XML
-
-  """MimeType image/tiff"""
+  """image/tiff mime type."""
   IMAGE_TIFF
 
-  """MimeType image/webp"""
+  """image/webp mime type."""
   IMAGE_WEBP
 
-  """MimeType text/calendar"""
+  """image/x-icon mime type."""
+  IMAGE_X_ICON
+
+  """text/calendar mime type."""
   TEXT_CALENDAR
 
-  """MimeType text/css"""
+  """text/css mime type."""
   TEXT_CSS
 
-  """MimeType text/csv"""
+  """text/csv mime type."""
   TEXT_CSV
 
-  """MimeType text/plain"""
+  """text/plain mime type."""
   TEXT_PLAIN
 
-  """MimeType text/richtext"""
+  """text/richtext mime type."""
   TEXT_RICHTEXT
 
-  """MimeType text/tab-separated-values"""
+  """text/tab-separated-values mime type."""
   TEXT_TAB_SEPARATED_VALUES
 
-  """MimeType text/vtt"""
+  """text/vtt mime type."""
   TEXT_VTT
 
-  """MimeType video/3gpp"""
+  """video/3gpp mime type."""
   VIDEO_3GPP
 
-  """MimeType video/3gpp2"""
+  """video/3gpp2 mime type."""
   VIDEO_3GPP2
 
-  """MimeType video/avi"""
+  """video/avi mime type."""
   VIDEO_AVI
 
-  """MimeType video/divx"""
+  """video/divx mime type."""
   VIDEO_DIVX
 
-  """MimeType video/mp4"""
+  """video/mp4 mime type."""
   VIDEO_MP4
 
-  """MimeType video/mpeg"""
+  """video/mpeg mime type."""
   VIDEO_MPEG
 
-  """MimeType video/ogg"""
+  """video/ogg mime type."""
   VIDEO_OGG
 
-  """MimeType video/quicktime"""
+  """video/quicktime mime type."""
   VIDEO_QUICKTIME
 
-  """MimeType video/webm"""
+  """video/webm mime type."""
   VIDEO_WEBM
 
-  """MimeType video/x-flv"""
+  """video/x-flv mime type."""
   VIDEO_X_FLV
 
-  """MimeType video/x-matroska"""
+  """video/x-matroska mime type."""
   VIDEO_X_MATROSKA
 
-  """MimeType video/x-ms-asf"""
+  """video/x-ms-asf mime type."""
   VIDEO_X_MS_ASF
 
-  """MimeType video/x-ms-wm"""
+  """video/x-ms-wm mime type."""
   VIDEO_X_MS_WM
 
-  """MimeType video/x-ms-wmv"""
+  """video/x-ms-wmv mime type."""
   VIDEO_X_MS_WMV
 
-  """MimeType video/x-ms-wmx"""
+  """video/x-ms-wmx mime type."""
   VIDEO_X_MS_WMX
+}
+
+"""The New type"""
+type New implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;News&quot; was set to Show in GraphQL.
+  """
+  New: New_New
+
+  """The ancestors of the content node."""
+  ancestors(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): NewToNewConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The content of the post."""
+  content(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  Connection between the NodeWithFeaturedImage type and the MediaItem type
+  """
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  """
+  The database identifier for the featured image node assigned to the content node
+  """
+  featuredImageDatabaseId: Int
+
+  """Globally unique ID of the featured image assigned to the node"""
+  featuredImageId: ID
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """Whether the news object is password protected."""
+  hasPassword: Boolean
+
+  """The globally unique identifier of the news object."""
+  id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """The id field matches the WP_Post-&gt;ID field."""
+  newId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """The parent of the content node."""
+  parent: NewToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the news object."""
+  password: String
+
+  """Connection between the New type and the New type"""
+  preview: NewToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""Connection to New Nodes"""
+interface NewConnection implements Connection {
+  """
+  A list of edges (relational context) between RootQuery and connected New Nodes
+  """
+  edges: [NewConnectionEdge!]!
+
+  """A list of connected New Nodes"""
+  nodes: [New!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: NewConnectionPageInfo!
+}
+
+"""Edge between a Node and a connected New"""
+interface NewConnectionEdge implements Edge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The connected New Node"""
+  node: New!
+}
+
+"""Page Info on the connected NewConnectionEdge"""
+interface NewConnectionPageInfo implements PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum NewIdType {
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""Connection between the New type and the New type"""
+type NewToNewConnection implements Connection & NewConnection {
+  """Edges for the NewToNewConnection connection"""
+  edges: [NewToNewConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [New!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: NewToNewConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type NewToNewConnectionEdge implements Edge & NewConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The item at the end of the edge"""
+  node: New! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+}
+
+"""Page Info on the &quot;NewToNewConnection&quot;"""
+type NewToNewConnectionPageInfo implements NewConnectionPageInfo & PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Connection between the New type and the New type"""
+type NewToParentConnectionEdge implements Edge & NewConnectionEdge & OneToOneConnection {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: New! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+}
+
+"""Connection between the New type and the New type"""
+type NewToPreviewConnectionEdge implements Edge & NewConnectionEdge & OneToOneConnection {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: New!
+}
+
+"""Field Group"""
+type New_New implements AcfFieldGroup {
+  """"""
+  about: String
+
+  """"""
+  description: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  image: MediaItem
+
+  """"""
+  readtime: String
+
+  """"""
+  title: String
+
+  """"""
+  userimage: MediaItem
+
+  """"""
+  username: String
 }
 
 """An object with an ID"""
@@ -5700,8 +6678,14 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
   """
   guid: String
 
+  """Whether the page object is password protected."""
+  hasPassword: Boolean
+
   """The globally unique identifier of the page object."""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
@@ -5759,6 +6743,9 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
 
   """The globally unique identifier of the parent node."""
   parentId: ID
+
+  """The password for the page object."""
+  password: String
 
   """Connection between the Page type and the page type"""
   preview: PageToPreviewConnectionEdge
@@ -6129,7 +7116,7 @@ input PageToRevisionConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -6310,6 +7297,25 @@ enum PluginStatusEnum {
 
 """The post type"""
 type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable {
+  """The ancestors of the content node."""
+  ancestors(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): PostToPostConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
   """Connection between the NodeWithAuthor type and the User type"""
   author: NodeWithAuthorToUserConnectionEdge
 
@@ -6467,11 +7473,23 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   """
   guid: String
 
+  """Whether the post object is password protected."""
+  hasPassword: Boolean
+
   """The globally unique identifier of the post object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is a node in the preview state"""
   isPreview: Boolean
@@ -6503,6 +7521,12 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
   The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
   """
   modifiedGmt: String
+
+  """The parent of the content node."""
+  parent: PostToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the post object."""
+  password: String
 
   """Whether the pings are open or closed for this particular post."""
   pingStatus: String
@@ -6543,6 +7567,11 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
 
   """Whether the object is a node in the preview state"""
   previewRevisionId: ID
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;projects&quot; was set to Show in GraphQL.
+  """
+  projects: Post_Projects
 
   """
   If the current node is a revision, this field exposes the node this is a revision of. Returns null if the node is not a revision of another node.
@@ -6793,11 +7822,20 @@ type PostFormat implements DatabaseIdentifier & Node & TermNode & UniformResourc
     last: Int
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -6995,7 +8033,7 @@ input PostFormatToContentNodeConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -7177,7 +8215,7 @@ input PostFormatToPostConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -7745,6 +8783,58 @@ input PostToCommentConnectionWhereArgs {
   userId: ID
 }
 
+"""Connection between the Post type and the post type"""
+type PostToParentConnectionEdge implements Edge & OneToOneConnection & PostConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Post! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+}
+
+"""Connection between the Post type and the post type"""
+type PostToPostConnection implements Connection & PostConnection {
+  """Edges for the PostToPostConnection connection"""
+  edges: [PostToPostConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Post!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: PostToPostConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type PostToPostConnectionEdge implements Edge & PostConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The item at the end of the edge"""
+  node: Post! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+}
+
+"""Page Info on the &quot;PostToPostConnection&quot;"""
+type PostToPostConnectionPageInfo implements PageInfo & PostConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
 """Connection between the Post type and the postFormat type"""
 type PostToPostFormatConnection implements Connection & PostFormatConnection {
   """Edges for the PostToPostFormatConnection connection"""
@@ -7989,7 +9079,7 @@ input PostToRevisionConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -8424,6 +9514,24 @@ type PostTypeLabelDetails {
   viewItems: String
 }
 
+"""Field Group"""
+type Post_Projects implements AcfFieldGroup {
+  """"""
+  color: String
+
+  """"""
+  description: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  image: MediaItem
+
+  """"""
+  title: String
+}
+
 """Nodes that can be seen in a preview (unpublished) state."""
 interface Previewable {
   """Whether the object is a node in the preview state"""
@@ -8434,6 +9542,349 @@ interface Previewable {
 
   """Whether the object is a node in the preview state"""
   previewRevisionId: ID
+}
+
+"""The Project type"""
+type Project implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
+  """The ancestors of the content node."""
+  ancestors(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ProjectToProjectConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The content of the post."""
+  content(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  Connection between the NodeWithFeaturedImage type and the MediaItem type
+  """
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  """
+  The database identifier for the featured image node assigned to the content node
+  """
+  featuredImageDatabaseId: Int
+
+  """Globally unique ID of the featured image assigned to the node"""
+  featuredImageId: ID
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """Whether the projects object is password protected."""
+  hasPassword: Boolean
+
+  """The globally unique identifier of the projects object."""
+  id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """The parent of the content node."""
+  parent: ProjectToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the projects object."""
+  password: String
+
+  """Connection between the Project type and the Project type"""
+  preview: ProjectToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """The id field matches the WP_Post-&gt;ID field."""
+  projectId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;projects&quot; was set to Show in GraphQL.
+  """
+  projects: Project_Projects
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""Connection to Project Nodes"""
+interface ProjectConnection implements Connection {
+  """
+  A list of edges (relational context) between RootQuery and connected Project Nodes
+  """
+  edges: [ProjectConnectionEdge!]!
+
+  """A list of connected Project Nodes"""
+  nodes: [Project!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ProjectConnectionPageInfo!
+}
+
+"""Edge between a Node and a connected Project"""
+interface ProjectConnectionEdge implements Edge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The connected Project Node"""
+  node: Project!
+}
+
+"""Page Info on the connected ProjectConnectionEdge"""
+interface ProjectConnectionPageInfo implements PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum ProjectIdType {
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""Connection between the Project type and the Project type"""
+type ProjectToParentConnectionEdge implements Edge & OneToOneConnection & ProjectConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Project! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+}
+
+"""Connection between the Project type and the Project type"""
+type ProjectToPreviewConnectionEdge implements Edge & OneToOneConnection & ProjectConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Project!
+}
+
+"""Connection between the Project type and the Project type"""
+type ProjectToProjectConnection implements Connection & ProjectConnection {
+  """Edges for the ProjectToProjectConnection connection"""
+  edges: [ProjectToProjectConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Project!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: ProjectToProjectConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type ProjectToProjectConnectionEdge implements Edge & ProjectConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The item at the end of the edge"""
+  node: Project! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+}
+
+"""Page Info on the &quot;ProjectToProjectConnection&quot;"""
+type ProjectToProjectConnectionPageInfo implements PageInfo & ProjectConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Field Group"""
+type Project_Projects implements AcfFieldGroup {
+  """"""
+  color: String
+
+  """"""
+  description: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  image: MediaItem
+
+  """"""
+  title: String
 }
 
 """The reading setting type"""
@@ -8594,6 +10045,12 @@ type RestoreCommentPayload {
 
 """The root mutation"""
 type RootMutation {
+  """The createAbc mutation"""
+  createAbc(
+    """Input for the createAbc mutation"""
+    input: CreateAbcInput!
+  ): CreateAbcPayload
+
   """The createCategory mutation"""
   createCategory(
     """Input for the createCategory mutation"""
@@ -8611,6 +10068,12 @@ type RootMutation {
     """Input for the createMediaItem mutation"""
     input: CreateMediaItemInput!
   ): CreateMediaItemPayload
+
+  """The createNew mutation"""
+  createNew(
+    """Input for the createNew mutation"""
+    input: CreateNewInput!
+  ): CreateNewPayload
 
   """The createPage mutation"""
   createPage(
@@ -8630,11 +10093,23 @@ type RootMutation {
     input: CreatePostFormatInput!
   ): CreatePostFormatPayload
 
+  """The createProject mutation"""
+  createProject(
+    """Input for the createProject mutation"""
+    input: CreateProjectInput!
+  ): CreateProjectPayload
+
   """The createTag mutation"""
   createTag(
     """Input for the createTag mutation"""
     input: CreateTagInput!
   ): CreateTagPayload
+
+  """The createTestimonial mutation"""
+  createTestimonial(
+    """Input for the createTestimonial mutation"""
+    input: CreateTestimonialInput!
+  ): CreateTestimonialPayload
 
   """The createUser mutation"""
   createUser(
@@ -8642,11 +10117,11 @@ type RootMutation {
     input: CreateUserInput!
   ): CreateUserPayload
 
-  """The createWpTestimonial mutation"""
-  createWpTestimonial(
-    """Input for the createWpTestimonial mutation"""
-    input: CreateWpTestimonialInput!
-  ): CreateWpTestimonialPayload
+  """The deleteAbc mutation"""
+  deleteAbc(
+    """Input for the deleteAbc mutation"""
+    input: DeleteAbcInput!
+  ): DeleteAbcPayload
 
   """The deleteCategory mutation"""
   deleteCategory(
@@ -8666,6 +10141,12 @@ type RootMutation {
     input: DeleteMediaItemInput!
   ): DeleteMediaItemPayload
 
+  """The deleteNew mutation"""
+  deleteNew(
+    """Input for the deleteNew mutation"""
+    input: DeleteNewInput!
+  ): DeleteNewPayload
+
   """The deletePage mutation"""
   deletePage(
     """Input for the deletePage mutation"""
@@ -8684,23 +10165,29 @@ type RootMutation {
     input: DeletePostFormatInput!
   ): DeletePostFormatPayload
 
+  """The deleteProject mutation"""
+  deleteProject(
+    """Input for the deleteProject mutation"""
+    input: DeleteProjectInput!
+  ): DeleteProjectPayload
+
   """The deleteTag mutation"""
   deleteTag(
     """Input for the deleteTag mutation"""
     input: DeleteTagInput!
   ): DeleteTagPayload
 
+  """The deleteTestimonial mutation"""
+  deleteTestimonial(
+    """Input for the deleteTestimonial mutation"""
+    input: DeleteTestimonialInput!
+  ): DeleteTestimonialPayload
+
   """The deleteUser mutation"""
   deleteUser(
     """Input for the deleteUser mutation"""
     input: DeleteUserInput!
   ): DeleteUserPayload
-
-  """The deleteWpTestimonial mutation"""
-  deleteWpTestimonial(
-    """Input for the deleteWpTestimonial mutation"""
-    input: DeleteWpTestimonialInput!
-  ): DeleteWpTestimonialPayload
 
   """Increase the count."""
   increaseCount(
@@ -8726,11 +10213,23 @@ type RootMutation {
     input: RestoreCommentInput!
   ): RestoreCommentPayload
 
+  """The sendEmail mutation"""
+  sendEmail(
+    """Input for the sendEmail mutation"""
+    input: SendEmailInput!
+  ): SendEmailPayload
+
   """Send password reset email to user"""
   sendPasswordResetEmail(
     """Input for the sendPasswordResetEmail mutation"""
     input: SendPasswordResetEmailInput!
   ): SendPasswordResetEmailPayload
+
+  """The updateAbc mutation"""
+  updateAbc(
+    """Input for the updateAbc mutation"""
+    input: UpdateAbcInput!
+  ): UpdateAbcPayload
 
   """The updateCategory mutation"""
   updateCategory(
@@ -8750,6 +10249,12 @@ type RootMutation {
     input: UpdateMediaItemInput!
   ): UpdateMediaItemPayload
 
+  """The updateNew mutation"""
+  updateNew(
+    """Input for the updateNew mutation"""
+    input: UpdateNewInput!
+  ): UpdateNewPayload
+
   """The updatePage mutation"""
   updatePage(
     """Input for the updatePage mutation"""
@@ -8768,6 +10273,12 @@ type RootMutation {
     input: UpdatePostFormatInput!
   ): UpdatePostFormatPayload
 
+  """The updateProject mutation"""
+  updateProject(
+    """Input for the updateProject mutation"""
+    input: UpdateProjectInput!
+  ): UpdateProjectPayload
+
   """The updateSettings mutation"""
   updateSettings(
     """Input for the updateSettings mutation"""
@@ -8780,21 +10291,72 @@ type RootMutation {
     input: UpdateTagInput!
   ): UpdateTagPayload
 
+  """The updateTestimonial mutation"""
+  updateTestimonial(
+    """Input for the updateTestimonial mutation"""
+    input: UpdateTestimonialInput!
+  ): UpdateTestimonialPayload
+
   """The updateUser mutation"""
   updateUser(
     """Input for the updateUser mutation"""
     input: UpdateUserInput!
   ): UpdateUserPayload
-
-  """The updateWpTestimonial mutation"""
-  updateWpTestimonial(
-    """Input for the updateWpTestimonial mutation"""
-    input: UpdateWpTestimonialInput!
-  ): UpdateWpTestimonialPayload
 }
 
 """The root entry point into the Graph"""
 type RootQuery {
+  """An object of the Abc Type. """
+  abc(
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
+    asPreview: Boolean
+
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: AbcIdType
+  ): Abc
+
+  """A Abc object"""
+  abcBy(
+    """Get the Abc by its database ID"""
+    abcId: Int
+
+    """Get the Abc object by its global ID"""
+    id: ID
+
+    """Get the Abc by its slug (only available for non-hierarchical types)"""
+    slug: String
+
+    """Get the Abc by its uri"""
+    uri: String
+  ): Abc @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the Abc type"""
+  abcs(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToAbcConnectionWhereArgs
+  ): RootQueryToAbcConnection
+
   """Entry point to get all settings for the site"""
   allSettings: Settings
 
@@ -8829,61 +10391,6 @@ type RootQuery {
     idType: CategoryIdType
   ): Category
 
-  """
-  Fields of the &#039;CoblocksAnimationControlsEnabledSettings&#039; settings group
-  """
-  coblocksAnimationControlsEnabledSettings: CoblocksAnimationControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksColorPanelControlsEnabledSettings&#039; settings group
-  """
-  coblocksColorPanelControlsEnabledSettings: CoblocksColorPanelControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksCustomColorsControlsEnabledSettings&#039; settings group
-  """
-  coblocksCustomColorsControlsEnabledSettings: CoblocksCustomColorsControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksGoogleMapsApiKeySettings&#039; settings group
-  """
-  coblocksGoogleMapsApiKeySettings: CoblocksGoogleMapsApiKeySettings
-
-  """
-  Fields of the &#039;CoblocksGoogleRecaptchaSecretKeySettings&#039; settings group
-  """
-  coblocksGoogleRecaptchaSecretKeySettings: CoblocksGoogleRecaptchaSecretKeySettings
-
-  """
-  Fields of the &#039;CoblocksGoogleRecaptchaSiteKeySettings&#039; settings group
-  """
-  coblocksGoogleRecaptchaSiteKeySettings: CoblocksGoogleRecaptchaSiteKeySettings
-
-  """
-  Fields of the &#039;CoblocksGradientPresetsEnabledSettings&#039; settings group
-  """
-  coblocksGradientPresetsEnabledSettings: CoblocksGradientPresetsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksLayoutSelectorControlsEnabledSettings&#039; settings group
-  """
-  coblocksLayoutSelectorControlsEnabledSettings: CoblocksLayoutSelectorControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksSiteContentControlsEnabledSettings&#039; settings group
-  """
-  coblocksSiteContentControlsEnabledSettings: CoblocksSiteContentControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksSiteDesignControlsEnabledSettings&#039; settings group
-  """
-  coblocksSiteDesignControlsEnabledSettings: CoblocksSiteDesignControlsEnabledSettings
-
-  """
-  Fields of the &#039;CoblocksTypographyControlsEnabledSettings&#039; settings group
-  """
-  coblocksTypographyControlsEnabledSettings: CoblocksTypographyControlsEnabledSettings
-
   """Returns a Comment"""
   comment(
     """Unique identifier for the comment node."""
@@ -8917,7 +10424,9 @@ type RootQuery {
 
   """A node used to manage content"""
   contentNode(
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
 
     """
@@ -8994,7 +10503,9 @@ type RootQuery {
 
   """An object of the mediaItem Type. """
   mediaItem(
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
 
     """The globally unique identifier of the object."""
@@ -9006,7 +10517,7 @@ type RootQuery {
 
   """A mediaItem object"""
   mediaItemBy(
-    """Get the object by its global ID"""
+    """Get the mediaItem object by its global ID"""
     id: ID
 
     """Get the mediaItem by its database ID"""
@@ -9107,6 +10618,57 @@ type RootQuery {
     where: RootQueryToMenuConnectionWhereArgs
   ): RootQueryToMenuConnection
 
+  """An object of the New Type. """
+  new(
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
+    asPreview: Boolean
+
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: NewIdType
+  ): New
+
+  """A New object"""
+  newBy(
+    """Get the New object by its global ID"""
+    id: ID
+
+    """Get the New by its database ID"""
+    newId: Int
+
+    """Get the New by its slug (only available for non-hierarchical types)"""
+    slug: String
+
+    """Get the New by its uri"""
+    uri: String
+  ): New @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the New type"""
+  news(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToNewConnectionWhereArgs
+  ): RootQueryToNewConnection
+
   """Fetches an object given its ID"""
   node(
     """The unique identifier of the node"""
@@ -9123,7 +10685,9 @@ type RootQuery {
 
   """An object of the page Type. """
   page(
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
 
     """The globally unique identifier of the object."""
@@ -9135,7 +10699,7 @@ type RootQuery {
 
   """A page object"""
   pageBy(
-    """Get the object by its global ID"""
+    """Get the page object by its global ID"""
     id: ID
 
     """Get the page by its database ID"""
@@ -9197,7 +10761,9 @@ type RootQuery {
 
   """An object of the post Type. """
   post(
-    """Whether to return the node as a preview instance"""
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
     asPreview: Boolean
 
     """The globally unique identifier of the object."""
@@ -9209,7 +10775,7 @@ type RootQuery {
 
   """A post object"""
   postBy(
-    """Get the object by its global ID"""
+    """Get the post object by its global ID"""
     id: ID
 
     """Get the post by its database ID"""
@@ -9274,6 +10840,59 @@ type RootQuery {
     """Arguments for filtering the connection"""
     where: RootQueryToPostConnectionWhereArgs
   ): RootQueryToPostConnection
+
+  """An object of the Project Type. """
+  project(
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
+    asPreview: Boolean
+
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: ProjectIdType
+  ): Project
+
+  """A Project object"""
+  projectBy(
+    """Get the Project object by its global ID"""
+    id: ID
+
+    """Get the Project by its database ID"""
+    projectId: Int
+
+    """
+    Get the Project by its slug (only available for non-hierarchical types)
+    """
+    slug: String
+
+    """Get the Project by its uri"""
+    uri: String
+  ): Project @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the Project type"""
+  projects(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToProjectConnectionWhereArgs
+  ): RootQueryToProjectConnection
 
   """Fields of the &#039;ReadingSettings&#039; settings group"""
   readingSettings: ReadingSettings
@@ -9435,6 +11054,59 @@ type RootQuery {
     where: RootQueryToTermNodeConnectionWhereArgs
   ): RootQueryToTermNodeConnection
 
+  """An object of the Testimonial Type. """
+  testimonial(
+    """
+    Whether to return the Preview Node instead of the Published Node. When the ID of a Node is provided along with asPreview being set to true, the preview node with un-published changes will be returned instead of the published node. If no preview node exists or the requester doesn't have proper capabilities to preview, no node will be returned. If the ID provided is a URI and has a preview query arg, it will be used as a fallback if the "asPreview" argument is not explicitly provided as an argument.
+    """
+    asPreview: Boolean
+
+    """The globally unique identifier of the object."""
+    id: ID!
+
+    """Type of unique identifier to fetch by. Default is Global ID"""
+    idType: TestimonialIdType
+  ): Testimonial
+
+  """A Testimonial object"""
+  testimonialBy(
+    """Get the Testimonial object by its global ID"""
+    id: ID
+
+    """
+    Get the Testimonial by its slug (only available for non-hierarchical types)
+    """
+    slug: String
+
+    """Get the Testimonial by its database ID"""
+    testimonialId: Int
+
+    """Get the Testimonial by its uri"""
+    uri: String
+  ): Testimonial @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  """Connection between the RootQuery type and the Testimonial type"""
+  testimonials(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+
+    """Arguments for filtering the connection"""
+    where: RootQueryToTestimonialConnectionWhereArgs
+  ): RootQueryToTestimonialConnection
+
   """A Theme object"""
   theme(
     """The globally unique identifier of the theme."""
@@ -9519,59 +11191,161 @@ type RootQuery {
   """Returns the current user"""
   viewer: User
 
-  """An object of the WpTestimonial Type. """
-  wpTestimonial(
-    """Whether to return the node as a preview instance"""
-    asPreview: Boolean
-
-    """The globally unique identifier of the object."""
-    id: ID!
-
-    """Type of unique identifier to fetch by. Default is Global ID"""
-    idType: WpTestimonialIdType
-  ): WpTestimonial
-
-  """A WpTestimonial object"""
-  wpTestimonialBy(
-    """Get the object by its global ID"""
-    id: ID
-
-    """
-    Get the WpTestimonial by its slug (only available for non-hierarchical types)
-    """
-    slug: String
-
-    """Get the WpTestimonial by its uri"""
-    uri: String
-
-    """Get the WpTestimonial by its database ID"""
-    wpTestimonialId: Int
-  ): WpTestimonial @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
-
-  """Connection between the RootQuery type and the WpTestimonial type"""
-  wpTestimonials(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """The number of items to return after the referenced "after" cursor"""
-    first: Int
-
-    """The number of items to return before the referenced "before" cursor"""
-    last: Int
-
-    """Arguments for filtering the connection"""
-    where: RootQueryToWpTestimonialConnectionWhereArgs
-  ): RootQueryToWpTestimonialConnection
-
   """Fields of the &#039;WritingSettings&#039; settings group"""
   writingSettings: WritingSettings
+}
+
+"""Connection between the RootQuery type and the Abc type"""
+type RootQueryToAbcConnection implements AbcConnection & Connection {
+  """Edges for the RootQueryToAbcConnection connection"""
+  edges: [RootQueryToAbcConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Abc!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: RootQueryToAbcConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type RootQueryToAbcConnectionEdge implements AbcConnectionEdge & Edge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Abc!
+}
+
+"""Page Info on the &quot;RootQueryToAbcConnection&quot;"""
+type RootQueryToAbcConnectionPageInfo implements AbcConnectionPageInfo & PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Arguments for filtering the RootQueryToAbcConnection connection"""
+input RootQueryToAbcConnectionWhereArgs {
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific database ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+  metaQuery: RootQueryToAbcConnectionWhereArgsMetaQuery
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """Paginate Abcs with offsets"""
+  offsetPagination: OffsetPagination
+
+  """What parameter to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
+""""""
+input RootQueryToAbcConnectionWhereArgsMetaArray {
+  """Custom field value"""
+  compare: RootQueryToAbcConnectionWhereArgsMetaCompareEnum
+
+  """Custom field key"""
+  key: String
+
+  """Custom field value"""
+  type: RootQueryToAbcConnectionWhereArgsMetaTypeEnum
+
+  """Custom field value"""
+  value: String
+}
+
+enum RootQueryToAbcConnectionWhereArgsMetaCompareEnum {
+  BETWEEN
+  EQUAL_TO
+  EXISTS
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL_TO
+  IN
+  LESS_THAN
+  LESS_THAN_OR_EQUAL_TO
+  LIKE
+  NOT_BETWEEN
+  NOT_EQUAL_TO
+  NOT_EXISTS
+  NOT_IN
+  NOT_LIKE
+}
+
+""""""
+input RootQueryToAbcConnectionWhereArgsMetaQuery {
+  metaArray: [RootQueryToAbcConnectionWhereArgsMetaArray]
+  relation: RelationEnum
+}
+
+enum RootQueryToAbcConnectionWhereArgsMetaTypeEnum {
+  BINARY
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  NUMERIC
+  SIGNED
+  TIME
+  UNSIGNED
 }
 
 """Connection between the RootQuery type and the category type"""
@@ -9922,7 +11696,7 @@ input RootQueryToContentNodeConnectionWhereArgs {
   """Paginate content nodes with offsets"""
   offsetPagination: OffsetPagination
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10214,7 +11988,7 @@ input RootQueryToMediaItemConnectionWhereArgs {
   """Paginate MediaItems with offsets"""
   offsetPagination: OffsetPagination
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10401,6 +12175,159 @@ input RootQueryToMenuItemConnectionWhereArgs {
   parentId: ID
 }
 
+"""Connection between the RootQuery type and the New type"""
+type RootQueryToNewConnection implements Connection & NewConnection {
+  """Edges for the RootQueryToNewConnection connection"""
+  edges: [RootQueryToNewConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [New!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: RootQueryToNewConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type RootQueryToNewConnectionEdge implements Edge & NewConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: New!
+}
+
+"""Page Info on the &quot;RootQueryToNewConnection&quot;"""
+type RootQueryToNewConnectionPageInfo implements NewConnectionPageInfo & PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Arguments for filtering the RootQueryToNewConnection connection"""
+input RootQueryToNewConnectionWhereArgs {
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific database ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+  metaQuery: RootQueryToNewConnectionWhereArgsMetaQuery
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """Paginate News with offsets"""
+  offsetPagination: OffsetPagination
+
+  """What parameter to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
+""""""
+input RootQueryToNewConnectionWhereArgsMetaArray {
+  """Custom field value"""
+  compare: RootQueryToNewConnectionWhereArgsMetaCompareEnum
+
+  """Custom field key"""
+  key: String
+
+  """Custom field value"""
+  type: RootQueryToNewConnectionWhereArgsMetaTypeEnum
+
+  """Custom field value"""
+  value: String
+}
+
+enum RootQueryToNewConnectionWhereArgsMetaCompareEnum {
+  BETWEEN
+  EQUAL_TO
+  EXISTS
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL_TO
+  IN
+  LESS_THAN
+  LESS_THAN_OR_EQUAL_TO
+  LIKE
+  NOT_BETWEEN
+  NOT_EQUAL_TO
+  NOT_EXISTS
+  NOT_IN
+  NOT_LIKE
+}
+
+""""""
+input RootQueryToNewConnectionWhereArgsMetaQuery {
+  metaArray: [RootQueryToNewConnectionWhereArgsMetaArray]
+  relation: RelationEnum
+}
+
+enum RootQueryToNewConnectionWhereArgsMetaTypeEnum {
+  BINARY
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  NUMERIC
+  SIGNED
+  TIME
+  UNSIGNED
+}
+
 """Connection between the RootQuery type and the page type"""
 type RootQueryToPageConnection implements Connection & PageConnection {
   """Edges for the RootQueryToPageConnection connection"""
@@ -10492,7 +12419,7 @@ input RootQueryToPageConnectionWhereArgs {
   """Paginate Pages with offsets"""
   offsetPagination: OffsetPagination
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10730,7 +12657,7 @@ input RootQueryToPostConnectionWhereArgs {
   """Paginate Posts with offsets"""
   offsetPagination: OffsetPagination
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -10955,6 +12882,159 @@ input RootQueryToPostFormatConnectionWhereArgs {
   updateTermMetaCache: Boolean
 }
 
+"""Connection between the RootQuery type and the Project type"""
+type RootQueryToProjectConnection implements Connection & ProjectConnection {
+  """Edges for the RootQueryToProjectConnection connection"""
+  edges: [RootQueryToProjectConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Project!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: RootQueryToProjectConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type RootQueryToProjectConnectionEdge implements Edge & ProjectConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Project!
+}
+
+"""Page Info on the &quot;RootQueryToProjectConnection&quot;"""
+type RootQueryToProjectConnectionPageInfo implements PageInfo & ProjectConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Arguments for filtering the RootQueryToProjectConnection connection"""
+input RootQueryToProjectConnectionWhereArgs {
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific database ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+  metaQuery: RootQueryToProjectConnectionWhereArgsMetaQuery
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """Paginate Projects with offsets"""
+  offsetPagination: OffsetPagination
+
+  """What parameter to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
+""""""
+input RootQueryToProjectConnectionWhereArgsMetaArray {
+  """Custom field value"""
+  compare: RootQueryToProjectConnectionWhereArgsMetaCompareEnum
+
+  """Custom field key"""
+  key: String
+
+  """Custom field value"""
+  type: RootQueryToProjectConnectionWhereArgsMetaTypeEnum
+
+  """Custom field value"""
+  value: String
+}
+
+enum RootQueryToProjectConnectionWhereArgsMetaCompareEnum {
+  BETWEEN
+  EQUAL_TO
+  EXISTS
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL_TO
+  IN
+  LESS_THAN
+  LESS_THAN_OR_EQUAL_TO
+  LIKE
+  NOT_BETWEEN
+  NOT_EQUAL_TO
+  NOT_EXISTS
+  NOT_IN
+  NOT_LIKE
+}
+
+""""""
+input RootQueryToProjectConnectionWhereArgsMetaQuery {
+  metaArray: [RootQueryToProjectConnectionWhereArgsMetaArray]
+  relation: RelationEnum
+}
+
+enum RootQueryToProjectConnectionWhereArgsMetaTypeEnum {
+  BINARY
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  NUMERIC
+  SIGNED
+  TIME
+  UNSIGNED
+}
+
 """Connection between the RootQuery type and the ContentNode type"""
 type RootQueryToRevisionsConnection implements Connection & ContentNodeConnection {
   """Edges for the RootQueryToRevisionsConnection connection"""
@@ -11030,7 +13110,7 @@ input RootQueryToRevisionsConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -11410,6 +13490,161 @@ input RootQueryToTermNodeConnectionWhereArgs {
   updateTermMetaCache: Boolean
 }
 
+"""Connection between the RootQuery type and the Testimonial type"""
+type RootQueryToTestimonialConnection implements Connection & TestimonialConnection {
+  """Edges for the RootQueryToTestimonialConnection connection"""
+  edges: [RootQueryToTestimonialConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Testimonial!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: RootQueryToTestimonialConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type RootQueryToTestimonialConnectionEdge implements Edge & TestimonialConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: Testimonial!
+}
+
+"""Page Info on the &quot;RootQueryToTestimonialConnection&quot;"""
+type RootQueryToTestimonialConnectionPageInfo implements PageInfo & TestimonialConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""
+Arguments for filtering the RootQueryToTestimonialConnection connection
+"""
+input RootQueryToTestimonialConnectionWhereArgs {
+  """Filter the connection based on dates"""
+  dateQuery: DateQueryInput
+
+  """
+  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  """
+  hasPassword: Boolean
+
+  """Specific database ID of the object"""
+  id: Int
+
+  """Array of IDs for the objects to retrieve"""
+  in: [ID]
+  metaQuery: RootQueryToTestimonialConnectionWhereArgsMetaQuery
+
+  """Get objects with a specific mimeType property"""
+  mimeType: MimeTypeEnum
+
+  """Slug / post_name of the object"""
+  name: String
+
+  """Specify objects to retrieve. Use slugs"""
+  nameIn: [String]
+
+  """
+  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  """
+  notIn: [ID]
+
+  """Paginate Testimonials with offsets"""
+  offsetPagination: OffsetPagination
+
+  """What parameter to use to order the objects by."""
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  """Use ID to return only children. Use 0 to return only top-level items"""
+  parent: ID
+
+  """Specify objects whose parent is in an array"""
+  parentIn: [ID]
+
+  """Specify posts whose parent is not in an array"""
+  parentNotIn: [ID]
+
+  """Show posts with a specific password."""
+  password: String
+
+  """Show Posts based on a keyword search"""
+  search: String
+
+  """Retrieve posts where post status is in an array."""
+  stati: [PostStatusEnum]
+
+  """Show posts with a specific status."""
+  status: PostStatusEnum
+
+  """Title of the object"""
+  title: String
+}
+
+""""""
+input RootQueryToTestimonialConnectionWhereArgsMetaArray {
+  """Custom field value"""
+  compare: RootQueryToTestimonialConnectionWhereArgsMetaCompareEnum
+
+  """Custom field key"""
+  key: String
+
+  """Custom field value"""
+  type: RootQueryToTestimonialConnectionWhereArgsMetaTypeEnum
+
+  """Custom field value"""
+  value: String
+}
+
+enum RootQueryToTestimonialConnectionWhereArgsMetaCompareEnum {
+  BETWEEN
+  EQUAL_TO
+  EXISTS
+  GREATER_THAN
+  GREATER_THAN_OR_EQUAL_TO
+  IN
+  LESS_THAN
+  LESS_THAN_OR_EQUAL_TO
+  LIKE
+  NOT_BETWEEN
+  NOT_EQUAL_TO
+  NOT_EXISTS
+  NOT_IN
+  NOT_LIKE
+}
+
+""""""
+input RootQueryToTestimonialConnectionWhereArgsMetaQuery {
+  metaArray: [RootQueryToTestimonialConnectionWhereArgsMetaArray]
+  relation: RelationEnum
+}
+
+enum RootQueryToTestimonialConnectionWhereArgsMetaTypeEnum {
+  BINARY
+  CHAR
+  DATE
+  DATETIME
+  DECIMAL
+  NUMERIC
+  SIGNED
+  TIME
+  UNSIGNED
+}
+
 """Connection between the RootQuery type and the Theme type"""
 type RootQueryToThemeConnection implements Connection & ThemeConnection {
   """Edges for the RootQueryToThemeConnection connection"""
@@ -11534,7 +13769,7 @@ input RootQueryToUserConnectionWhereArgs {
   """Paginate users with offsets"""
   offsetPagination: OffsetPagination
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [UsersConnectionOrderbyInput]
 
   """
@@ -11604,159 +13839,44 @@ type RootQueryToUserRoleConnectionPageInfo implements PageInfo & UserRoleConnect
   startCursor: String
 }
 
-"""Connection between the RootQuery type and the WpTestimonial type"""
-type RootQueryToWpTestimonialConnection implements Connection & WpTestimonialConnection {
-  """Edges for the RootQueryToWpTestimonialConnection connection"""
-  edges: [RootQueryToWpTestimonialConnectionEdge!]!
+"""The strategy to use when loading the script"""
+enum ScriptLoadingStrategyEnum {
+  """Use the script `async` attribute"""
+  ASYNC
 
-  """The nodes of the connection, without the edges"""
-  nodes: [WpTestimonial!]!
-
-  """Information about pagination in a connection."""
-  pageInfo: RootQueryToWpTestimonialConnectionPageInfo!
+  """Use the script `defer` attribute"""
+  DEFER
 }
 
-"""An edge in a connection"""
-type RootQueryToWpTestimonialConnectionEdge implements Edge & WpTestimonialConnectionEdge {
-  """A cursor for use in pagination"""
-  cursor: String
-
-  """The item at the end of the edge"""
-  node: WpTestimonial!
-}
-
-"""Page Info on the &quot;RootQueryToWpTestimonialConnection&quot;"""
-type RootQueryToWpTestimonialConnectionPageInfo implements PageInfo & WPPageInfo & WpTestimonialConnectionPageInfo {
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
+"""Input for the sendEmail mutation."""
+input SendEmailInput {
   """
-  Get information about the offset pagination state in the current connection
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
   """
-  offsetPagination: OffsetPaginationPageInfo
+  clientMutationId: String
 
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
+  """The email address to send the email to"""
+  email: String
+
+  """The content of the email message"""
+  message: String
+
+  """The subject of the email"""
+  subject: String
 }
 
-"""
-Arguments for filtering the RootQueryToWpTestimonialConnection connection
-"""
-input RootQueryToWpTestimonialConnectionWhereArgs {
-  """Filter the connection based on dates"""
-  dateQuery: DateQueryInput
-
+"""The payload for the sendEmail mutation."""
+type SendEmailPayload {
   """
-  True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
   """
-  hasPassword: Boolean
+  clientMutationId: String
 
-  """Specific database ID of the object"""
-  id: Int
+  """"""
+  message: String
 
-  """Array of IDs for the objects to retrieve"""
-  in: [ID]
-  metaQuery: RootQueryToWpTestimonialConnectionWhereArgsMetaQuery
-
-  """Get objects with a specific mimeType property"""
-  mimeType: MimeTypeEnum
-
-  """Slug / post_name of the object"""
-  name: String
-
-  """Specify objects to retrieve. Use slugs"""
-  nameIn: [String]
-
-  """
-  Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
-  """
-  notIn: [ID]
-
-  """Paginate WpTestimonials with offsets"""
-  offsetPagination: OffsetPagination
-
-  """What paramater to use to order the objects by."""
-  orderby: [PostObjectsConnectionOrderbyInput]
-
-  """Use ID to return only children. Use 0 to return only top-level items"""
-  parent: ID
-
-  """Specify objects whose parent is in an array"""
-  parentIn: [ID]
-
-  """Specify posts whose parent is not in an array"""
-  parentNotIn: [ID]
-
-  """Show posts with a specific password."""
-  password: String
-
-  """Show Posts based on a keyword search"""
-  search: String
-
-  """Retrieve posts where post status is in an array."""
-  stati: [PostStatusEnum]
-
-  """Show posts with a specific status."""
-  status: PostStatusEnum
-
-  """Title of the object"""
-  title: String
-}
-
-""""""
-input RootQueryToWpTestimonialConnectionWhereArgsMetaArray {
-  """Custom field value"""
-  compare: RootQueryToWpTestimonialConnectionWhereArgsMetaCompareEnum
-
-  """Custom field key"""
-  key: String
-
-  """Custom field value"""
-  type: RootQueryToWpTestimonialConnectionWhereArgsMetaTypeEnum
-
-  """Custom field value"""
-  value: String
-}
-
-enum RootQueryToWpTestimonialConnectionWhereArgsMetaCompareEnum {
-  BETWEEN
-  EQUAL_TO
-  EXISTS
-  GREATER_THAN
-  GREATER_THAN_OR_EQUAL_TO
-  IN
-  LESS_THAN
-  LESS_THAN_OR_EQUAL_TO
-  LIKE
-  NOT_BETWEEN
-  NOT_EQUAL_TO
-  NOT_EXISTS
-  NOT_IN
-  NOT_LIKE
-}
-
-""""""
-input RootQueryToWpTestimonialConnectionWhereArgsMetaQuery {
-  metaArray: [RootQueryToWpTestimonialConnectionWhereArgsMetaArray]
-  relation: RelationEnum
-}
-
-enum RootQueryToWpTestimonialConnectionWhereArgsMetaTypeEnum {
-  BINARY
-  CHAR
-  DATE
-  DATETIME
-  DECIMAL
-  NUMERIC
-  SIGNED
-  TIME
-  UNSIGNED
+  """"""
+  success: Boolean
 }
 
 """Input for the sendPasswordResetEmail mutation."""
@@ -11788,39 +13908,6 @@ type SendPasswordResetEmailPayload {
 
 """All of the registered settings"""
 type Settings {
-  """Settings of the the boolean Settings Group"""
-  coblocksAnimationControlsEnabledSettingsCoblocksAnimationControlsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksColorPanelControlsEnabledSettingsCoblocksColorPanelControlsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksCustomColorsControlsEnabledSettingsCoblocksCustomColorsControlsEnabled: Boolean
-
-  """Settings of the the string Settings Group"""
-  coblocksGoogleMapsApiKeySettingsCoblocksGoogleMapsApiKey: String
-
-  """Settings of the the string Settings Group"""
-  coblocksGoogleRecaptchaSecretKeySettingsCoblocksGoogleRecaptchaSecretKey: String
-
-  """Settings of the the string Settings Group"""
-  coblocksGoogleRecaptchaSiteKeySettingsCoblocksGoogleRecaptchaSiteKey: String
-
-  """Settings of the the boolean Settings Group"""
-  coblocksGradientPresetsEnabledSettingsCoblocksGradientPresetsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksLayoutSelectorControlsEnabledSettingsCoblocksLayoutSelectorControlsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksSiteContentControlsEnabledSettingsCoblocksSiteContentControlsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksSiteDesignControlsEnabledSettingsCoblocksSiteDesignControlsEnabled: Boolean
-
-  """Settings of the the boolean Settings Group"""
-  coblocksTypographyControlsEnabledSettingsCoblocksTypographyControlsEnabled: Boolean
-
   """Settings of the the string Settings Group"""
   discussionSettingsDefaultCommentStatus: String
 
@@ -11874,12 +13961,6 @@ type Settings {
 
   """Settings of the the boolean Settings Group"""
   writingSettingsUseSmilies: Boolean
-}
-
-"""The template assigned to the node"""
-type SliderRevolutionBlankTemplate implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
 }
 
 """The tag type"""
@@ -11953,11 +14034,20 @@ type Tag implements DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Un
     last: Int
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -12153,7 +14243,7 @@ input TagToContentNodeConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -12335,7 +14425,7 @@ input TagToPostConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -12463,6 +14553,25 @@ type Taxonomy implements Node {
     last: Int
   ): TaxonomyToContentTypeConnection
 
+  """List of Term Nodes associated with the Taxonomy"""
+  connectedTerms(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): TaxonomyToTermNodeConnection
+
   """
   Description of the taxonomy. This field is equivalent to WP_Taxonomy-&gt;description
   """
@@ -12495,7 +14604,7 @@ type Taxonomy implements Node {
   public: Boolean
 
   """
-  Name of content type to diplay in REST API &quot;wp/v2&quot; namespace.
+  Name of content type to display in REST API &quot;wp/v2&quot; namespace.
   """
   restBase: String
 
@@ -12644,20 +14753,49 @@ type TaxonomyToContentTypeConnectionPageInfo implements ContentTypeConnectionPag
   startCursor: String
 }
 
-"""The template assigned to the node"""
-type Template_ElementorCanvas implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
+"""Connection between the Taxonomy type and the TermNode type"""
+type TaxonomyToTermNodeConnection implements Connection & TermNodeConnection {
+  """Edges for the TaxonomyToTermNodeConnection connection"""
+  edges: [TaxonomyToTermNodeConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [TermNode!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TaxonomyToTermNodeConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type TaxonomyToTermNodeConnectionEdge implements Edge & TermNodeConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String
+
+  """The item at the end of the edge"""
+  node: TermNode!
+}
+
+"""Page Info on the &quot;TaxonomyToTermNodeConnection&quot;"""
+type TaxonomyToTermNodeConnectionPageInfo implements PageInfo & TermNodeConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
 }
 
 """The template assigned to the node"""
-type Template_ElementorFullWidth implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
-}
-
-"""The template assigned to the node"""
-type Template_Theme implements ContentTemplate {
+type Template_PageBuilders implements ContentTemplate {
   """The name of the template"""
   templateName: String
 }
@@ -12713,11 +14851,20 @@ interface TermNode implements Node & UniformResourceIdentifiable {
     last: Int
   ): TermNodeToEnqueuedStylesheetConnection
 
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -12918,6 +15065,349 @@ enum TermObjectsConnectionOrderbyEnum {
   TERM_ORDER
 }
 
+"""The Testimonial type"""
+type Testimonial implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
+  """The ancestors of the content node."""
+  ancestors(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): TestimonialToTestimonialConnection @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The content of the post."""
+  content(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """Connection between the ContentNode type and the ContentType type"""
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  """The name of the Content Type the node belongs to"""
+  contentTypeName: String!
+
+  """The unique identifier stored in the database"""
+  databaseId: Int!
+
+  """Post publishing date."""
+  date: String
+
+  """The publishing date set in GMT."""
+  dateGmt: String
+
+  """The desired slug of the post"""
+  desiredSlug: String
+
+  """
+  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  """
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  """The RSS enclosure for the object"""
+  enclosure: String
+
+  """Connection between the ContentNode type and the EnqueuedScript type"""
+  enqueuedScripts(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedScriptConnection
+
+  """
+  Connection between the ContentNode type and the EnqueuedStylesheet type
+  """
+  enqueuedStylesheets(
+    """
+    Cursor used along with the "first" argument to reference where in the dataset to get data
+    """
+    after: String
+
+    """
+    Cursor used along with the "last" argument to reference where in the dataset to get data
+    """
+    before: String
+
+    """The number of items to return after the referenced "after" cursor"""
+    first: Int
+
+    """The number of items to return before the referenced "before" cursor"""
+    last: Int
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  """
+  Connection between the NodeWithFeaturedImage type and the MediaItem type
+  """
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  """
+  The database identifier for the featured image node assigned to the content node
+  """
+  featuredImageDatabaseId: Int
+
+  """Globally unique ID of the featured image assigned to the node"""
+  featuredImageId: ID
+
+  """
+  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  """
+  guid: String
+
+  """Whether the testimonials object is password protected."""
+  hasPassword: Boolean
+
+  """The globally unique identifier of the testimonials object."""
+  id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
+  """Whether the node is a Content Node"""
+  isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
+
+  """Whether the object is a node in the preview state"""
+  isPreview: Boolean
+
+  """Whether the object is restricted from the current viewer"""
+  isRestricted: Boolean
+
+  """Whether the node is a Term"""
+  isTermNode: Boolean!
+
+  """The user that most recently edited the node"""
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  """The permalink of the post"""
+  link: String
+
+  """
+  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  """
+  modified: String
+
+  """
+  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  """
+  modifiedGmt: String
+
+  """The parent of the content node."""
+  parent: TestimonialToParentConnectionEdge @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+
+  """The password for the testimonials object."""
+  password: String
+
+  """Connection between the Testimonial type and the Testimonial type"""
+  preview: TestimonialToPreviewConnectionEdge
+
+  """The database id of the preview node"""
+  previewRevisionDatabaseId: Int
+
+  """Whether the object is a node in the preview state"""
+  previewRevisionId: ID
+
+  """
+  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  """
+  slug: String
+
+  """The current status of the object"""
+  status: String
+
+  """The template assigned to the node"""
+  template: ContentTemplate
+
+  """
+  Added to the GraphQL Schema because the ACF Field Group &quot;Testimonials&quot; was set to Show in GraphQL.
+  """
+  testimonial: Testimonial_Testimonial
+
+  """The id field matches the WP_Post-&gt;ID field."""
+  testimonialId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  """
+  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  """
+  title(
+    """Format of the field output"""
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  """The unique resource identifier path"""
+  uri: String
+}
+
+"""Connection to Testimonial Nodes"""
+interface TestimonialConnection implements Connection {
+  """
+  A list of edges (relational context) between RootQuery and connected Testimonial Nodes
+  """
+  edges: [TestimonialConnectionEdge!]!
+
+  """A list of connected Testimonial Nodes"""
+  nodes: [Testimonial!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TestimonialConnectionPageInfo!
+}
+
+"""Edge between a Node and a connected Testimonial"""
+interface TestimonialConnectionEdge implements Edge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The connected Testimonial Node"""
+  node: Testimonial!
+}
+
+"""Page Info on the connected TestimonialConnectionEdge"""
+interface TestimonialConnectionPageInfo implements PageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""The Type of Identifier used to fetch a single resource. Default is ID."""
+enum TestimonialIdType {
+  """Identify a resource by the Database ID."""
+  DATABASE_ID
+
+  """Identify a resource by the (hashed) Global ID."""
+  ID
+
+  """
+  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  """
+  SLUG
+
+  """Identify a resource by the URI."""
+  URI
+}
+
+"""Connection between the Testimonial type and the Testimonial type"""
+type TestimonialToParentConnectionEdge implements Edge & OneToOneConnection & TestimonialConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Testimonial! @deprecated(reason: "This content type is not hierarchical and typically will not have a parent")
+}
+
+"""Connection between the Testimonial type and the Testimonial type"""
+type TestimonialToPreviewConnectionEdge implements Edge & OneToOneConnection & TestimonialConnectionEdge {
+  """
+  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
+  """
+  cursor: String
+
+  """The node of the connection, without the edges"""
+  node: Testimonial!
+}
+
+"""Connection between the Testimonial type and the Testimonial type"""
+type TestimonialToTestimonialConnection implements Connection & TestimonialConnection {
+  """Edges for the TestimonialToTestimonialConnection connection"""
+  edges: [TestimonialToTestimonialConnectionEdge!]!
+
+  """The nodes of the connection, without the edges"""
+  nodes: [Testimonial!]!
+
+  """Information about pagination in a connection."""
+  pageInfo: TestimonialToTestimonialConnectionPageInfo!
+}
+
+"""An edge in a connection"""
+type TestimonialToTestimonialConnectionEdge implements Edge & TestimonialConnectionEdge {
+  """A cursor for use in pagination"""
+  cursor: String @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+
+  """The item at the end of the edge"""
+  node: Testimonial! @deprecated(reason: "This content type is not hierarchical and typically will not have ancestors")
+}
+
+"""Page Info on the &quot;TestimonialToTestimonialConnection&quot;"""
+type TestimonialToTestimonialConnectionPageInfo implements PageInfo & TestimonialConnectionPageInfo & WPPageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """
+  Get information about the offset pagination state in the current connection
+  """
+  offsetPagination: OffsetPaginationPageInfo
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+"""Field Group"""
+type Testimonial_Testimonial implements AcfFieldGroup {
+  """"""
+  designation: String
+
+  """The name of the ACF Field Group"""
+  fieldGroupName: String
+
+  """"""
+  logo: MediaItem
+
+  """"""
+  name: String
+
+  """"""
+  review: String
+}
+
 """A theme object"""
 type Theme implements Node {
   """
@@ -13017,25 +15507,78 @@ interface ThemeConnectionPageInfo implements PageInfo & WPPageInfo {
   startCursor: String
 }
 
-"""The template assigned to the node"""
-type UnderConstructionTemplate implements ContentTemplate {
-  """The name of the template"""
-  templateName: String
-}
-
 """Any node that has a URI"""
 interface UniformResourceIdentifiable implements Node {
-  """The unique resource identifier path"""
+  """The globally unique ID for the object"""
   id: ID!
+
+  """Whether the node is a Comment"""
+  isComment: Boolean!
 
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the node is a Term"""
   isTermNode: Boolean!
 
   """The unique resource identifier path"""
   uri: String
+}
+
+"""Input for the updateAbc mutation."""
+input UpdateAbcInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """The ID of the Abc object"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateAbc mutation."""
+type UpdateAbcPayload {
+  """The Post object mutation type."""
+  abc: Abc
+
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
 }
 
 """Input for the updateCategory mutation."""
@@ -13198,6 +15741,56 @@ type UpdateMediaItemPayload {
 
   """The MediaItem object mutation type."""
   mediaItem: MediaItem
+}
+
+"""Input for the updateNew mutation."""
+input UpdateNewInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """The ID of the New object"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateNew mutation."""
+type UpdateNewPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  new: New
 }
 
 """Input for the updatePage mutation."""
@@ -13372,53 +15965,62 @@ type UpdatePostPayload {
   post: Post
 }
 
+"""Input for the updateProject mutation."""
+input UpdateProjectInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """The ID of the Project object"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateProject mutation."""
+type UpdateProjectPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  project: Project
+}
+
 """Input for the updateSettings mutation."""
 input UpdateSettingsInput {
   """
   This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
   """
   clientMutationId: String
-
-  """Setting use to disable or enable animation controls across the site."""
-  coblocksAnimationControlsEnabledSettingsCoblocksAnimationControlsEnabled: Boolean
-
-  """Setting use to disable or enable all color controls across the site."""
-  coblocksColorPanelControlsEnabledSettingsCoblocksColorPanelControlsEnabled: Boolean
-
-  """
-  Setting use to disable or enable custom color controls across the site.
-  """
-  coblocksCustomColorsControlsEnabledSettingsCoblocksCustomColorsControlsEnabled: Boolean
-
-  """Google Map API key for map rendering"""
-  coblocksGoogleMapsApiKeySettingsCoblocksGoogleMapsApiKey: String
-
-  """Google reCaptcha secret key for form spam protection"""
-  coblocksGoogleRecaptchaSecretKeySettingsCoblocksGoogleRecaptchaSecretKey: String
-
-  """Google reCaptcha site key for form spam protection"""
-  coblocksGoogleRecaptchaSiteKeySettingsCoblocksGoogleRecaptchaSiteKey: String
-
-  """
-  Setting use to disable or enable gradient controls and presets across the site.
-  """
-  coblocksGradientPresetsEnabledSettingsCoblocksGradientPresetsEnabled: Boolean
-
-  """
-  Setting use to disable or enable layout selector controls across the site.
-  """
-  coblocksLayoutSelectorControlsEnabledSettingsCoblocksLayoutSelectorControlsEnabled: Boolean
-
-  """
-  Setting use to disable or enable custom color controls across the site.
-  """
-  coblocksSiteContentControlsEnabledSettingsCoblocksSiteContentControlsEnabled: Boolean
-
-  """Setting use to disable or enable typography controls across the site."""
-  coblocksSiteDesignControlsEnabledSettingsCoblocksSiteDesignControlsEnabled: Boolean
-
-  """Setting use to disable or enable typography controls across the site."""
-  coblocksTypographyControlsEnabledSettingsCoblocksTypographyControlsEnabled: Boolean
 
   """Allow people to submit comments on new posts."""
   discussionSettingsDefaultCommentStatus: String
@@ -13487,39 +16089,6 @@ type UpdateSettingsPayload {
   """
   clientMutationId: String
 
-  """Update the CoblocksAnimationControlsEnabledSettings setting."""
-  coblocksAnimationControlsEnabledSettings: CoblocksAnimationControlsEnabledSettings
-
-  """Update the CoblocksColorPanelControlsEnabledSettings setting."""
-  coblocksColorPanelControlsEnabledSettings: CoblocksColorPanelControlsEnabledSettings
-
-  """Update the CoblocksCustomColorsControlsEnabledSettings setting."""
-  coblocksCustomColorsControlsEnabledSettings: CoblocksCustomColorsControlsEnabledSettings
-
-  """Update the CoblocksGoogleMapsApiKeySettings setting."""
-  coblocksGoogleMapsApiKeySettings: CoblocksGoogleMapsApiKeySettings
-
-  """Update the CoblocksGoogleRecaptchaSecretKeySettings setting."""
-  coblocksGoogleRecaptchaSecretKeySettings: CoblocksGoogleRecaptchaSecretKeySettings
-
-  """Update the CoblocksGoogleRecaptchaSiteKeySettings setting."""
-  coblocksGoogleRecaptchaSiteKeySettings: CoblocksGoogleRecaptchaSiteKeySettings
-
-  """Update the CoblocksGradientPresetsEnabledSettings setting."""
-  coblocksGradientPresetsEnabledSettings: CoblocksGradientPresetsEnabledSettings
-
-  """Update the CoblocksLayoutSelectorControlsEnabledSettings setting."""
-  coblocksLayoutSelectorControlsEnabledSettings: CoblocksLayoutSelectorControlsEnabledSettings
-
-  """Update the CoblocksSiteContentControlsEnabledSettings setting."""
-  coblocksSiteContentControlsEnabledSettings: CoblocksSiteContentControlsEnabledSettings
-
-  """Update the CoblocksSiteDesignControlsEnabledSettings setting."""
-  coblocksSiteDesignControlsEnabledSettings: CoblocksSiteDesignControlsEnabledSettings
-
-  """Update the CoblocksTypographyControlsEnabledSettings setting."""
-  coblocksTypographyControlsEnabledSettings: CoblocksTypographyControlsEnabledSettings
-
   """Update the DiscussionSettings setting."""
   discussionSettings: DiscussionSettings
 
@@ -13567,6 +16136,56 @@ type UpdateTagPayload {
 
   """The created post_tag"""
   tag: Tag
+}
+
+"""Input for the updateTestimonial mutation."""
+input UpdateTestimonialInput {
+  """
+  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The content of the object"""
+  content: String
+
+  """
+  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  """
+  date: String
+
+  """The ID of the Testimonial object"""
+  id: ID!
+
+  """Override the edit lock when another user is editing the post"""
+  ignoreEditLock: Boolean
+
+  """
+  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  """
+  menuOrder: Int
+
+  """The password used to protect the content of the object"""
+  password: String
+
+  """The slug of the object"""
+  slug: String
+
+  """The status of the object"""
+  status: PostStatusEnum
+
+  """The title of the object"""
+  title: String
+}
+
+"""The payload for the updateTestimonial mutation."""
+type UpdateTestimonialPayload {
+  """
+  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  """
+  clientMutationId: String
+
+  """The Post object mutation type."""
+  testimonial: Testimonial
 }
 
 """Input for the updateUser mutation."""
@@ -13643,56 +16262,6 @@ type UpdateUserPayload {
 
   """The User object mutation type."""
   user: User
-}
-
-"""Input for the updateWpTestimonial mutation."""
-input UpdateWpTestimonialInput {
-  """
-  This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """The content of the object"""
-  content: String
-
-  """
-  The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
-  """
-  date: String
-
-  """The ID of the WpTestimonial object"""
-  id: ID!
-
-  """Override the edit lock when another user is editing the post"""
-  ignoreEditLock: Boolean
-
-  """
-  A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
-  """
-  menuOrder: Int
-
-  """The password used to protect the content of the object"""
-  password: String
-
-  """The slug of the object"""
-  slug: String
-
-  """The status of the object"""
-  status: PostStatusEnum
-
-  """The title of the object"""
-  title: String
-}
-
-"""The payload for the updateWpTestimonial mutation."""
-type UpdateWpTestimonialPayload {
-  """
-  If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
-  """
-  clientMutationId: String
-
-  """The Post object mutation type."""
-  wpTestimonial: WpTestimonial
 }
 
 """A User object"""
@@ -13807,8 +16376,17 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
   """The globally unique identifier for the user object."""
   id: ID!
 
+  """Whether the node is a Comment"""
+  isComment: Boolean!
+
   """Whether the node is a Content Node"""
   isContentNode: Boolean!
+
+  """Whether the node represents the front page."""
+  isFrontPage: Boolean!
+
+  """Whether  the node represents the blog page."""
+  isPostsPage: Boolean!
 
   """Whether the object is restricted from the current viewer"""
   isRestricted: Boolean
@@ -13849,7 +16427,7 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
   ): UserToMediaItemConnection
 
   """
-  Display name of the user. This is equivalent to the WP_User-&gt;dispaly_name property.
+  Display name of the user. This is equivalent to the WP_User-&gt;display_name property.
   """
   name: String
 
@@ -13950,6 +16528,11 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
     """The number of items to return before the referenced "before" cursor"""
     last: Int
   ): UserToUserRoleConnection
+
+  """
+  Whether the Toolbar should be displayed when the user is viewing the site.
+  """
+  shouldShowAdminToolbar: Boolean
 
   """
   The slug for the user. This field is equivalent to WP_User-&gt;user_nicename
@@ -14109,12 +16692,6 @@ enum UserRoleEnum {
 
   """User role with specific capabilities"""
   AUTHOR
-
-  """User role with specific capabilities"""
-  BOOKIT_CUSTOMER
-
-  """User role with specific capabilities"""
-  BOOKIT_STAFF
 
   """User role with specific capabilities"""
   CONTRIBUTOR
@@ -14435,7 +17012,7 @@ input UserToMediaItemConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14601,7 +17178,7 @@ input UserToPageConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14783,7 +17360,7 @@ input UserToPostConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -14954,7 +17531,7 @@ input UserToRevisionsConnectionWhereArgs {
   """
   notIn: [ID]
 
-  """What paramater to use to order the objects by."""
+  """What parameter to use to order the objects by."""
   orderby: [PostObjectsConnectionOrderbyInput]
 
   """Use ID to return only children. Use 0 to return only top-level items"""
@@ -15145,260 +17722,6 @@ interface WPPageInfo implements PageInfo {
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
-}
-
-"""The WpTestimonial type"""
-type WpTestimonial implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
-  """The content of the post."""
-  content(
-    """Format of the field output"""
-    format: PostObjectFieldFormatEnum
-  ): String
-
-  """Connection between the ContentNode type and the ContentType type"""
-  contentType: ContentNodeToContentTypeConnectionEdge
-
-  """The name of the Content Type the node belongs to"""
-  contentTypeName: String!
-
-  """The unique identifier stored in the database"""
-  databaseId: Int!
-
-  """Post publishing date."""
-  date: String
-
-  """The publishing date set in GMT."""
-  dateGmt: String
-
-  """The desired slug of the post"""
-  desiredSlug: String
-
-  """
-  If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
-  """
-  editingLockedBy: ContentNodeToEditLockConnectionEdge
-
-  """The RSS enclosure for the object"""
-  enclosure: String
-
-  """Connection between the ContentNode type and the EnqueuedScript type"""
-  enqueuedScripts(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """The number of items to return after the referenced "after" cursor"""
-    first: Int
-
-    """The number of items to return before the referenced "before" cursor"""
-    last: Int
-  ): ContentNodeToEnqueuedScriptConnection
-
-  """
-  Connection between the ContentNode type and the EnqueuedStylesheet type
-  """
-  enqueuedStylesheets(
-    """
-    Cursor used along with the "first" argument to reference where in the dataset to get data
-    """
-    after: String
-
-    """
-    Cursor used along with the "last" argument to reference where in the dataset to get data
-    """
-    before: String
-
-    """The number of items to return after the referenced "after" cursor"""
-    first: Int
-
-    """The number of items to return before the referenced "before" cursor"""
-    last: Int
-  ): ContentNodeToEnqueuedStylesheetConnection
-
-  """
-  Connection between the NodeWithFeaturedImage type and the MediaItem type
-  """
-  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
-
-  """
-  The database identifier for the featured image node assigned to the content node
-  """
-  featuredImageDatabaseId: Int
-
-  """Globally unique ID of the featured image assigned to the node"""
-  featuredImageId: ID
-
-  """
-  The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
-  """
-  guid: String
-
-  """The globally unique identifier of the wp_testimonial object."""
-  id: ID!
-
-  """Whether the node is a Content Node"""
-  isContentNode: Boolean!
-
-  """Whether the object is a node in the preview state"""
-  isPreview: Boolean
-
-  """Whether the object is restricted from the current viewer"""
-  isRestricted: Boolean
-
-  """Whether the node is a Term"""
-  isTermNode: Boolean!
-
-  """The user that most recently edited the node"""
-  lastEditedBy: ContentNodeToEditLastConnectionEdge
-
-  """The permalink of the post"""
-  link: String
-
-  """
-  The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
-  """
-  modified: String
-
-  """
-  The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
-  """
-  modifiedGmt: String
-
-  """Connection between the WpTestimonial type and the WpTestimonial type"""
-  preview: WpTestimonialToPreviewConnectionEdge
-
-  """The database id of the preview node"""
-  previewRevisionDatabaseId: Int
-
-  """Whether the object is a node in the preview state"""
-  previewRevisionId: ID
-
-  """
-  The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
-  """
-  slug: String
-
-  """The current status of the object"""
-  status: String
-
-  """The template assigned to the node"""
-  template: ContentTemplate
-
-  """
-  The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
-  """
-  title(
-    """Format of the field output"""
-    format: PostObjectFieldFormatEnum
-  ): String
-
-  """The unique resource identifier path"""
-  uri: String
-
-  """The id field matches the WP_Post-&gt;ID field."""
-  wpTestimonialId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
-
-  """
-  Added to the GraphQL Schema because the ACF Field Group &quot;Wp Testimonials&quot; was set to Show in GraphQL.
-  """
-  wp_testimonial: WpTestimonial_WpTestimonial
-}
-
-"""Connection to WpTestimonial Nodes"""
-interface WpTestimonialConnection implements Connection {
-  """
-  A list of edges (relational context) between RootQuery and connected WpTestimonial Nodes
-  """
-  edges: [WpTestimonialConnectionEdge!]!
-
-  """A list of connected WpTestimonial Nodes"""
-  nodes: [WpTestimonial!]!
-
-  """Information about pagination in a connection."""
-  pageInfo: WpTestimonialConnectionPageInfo!
-}
-
-"""Edge between a Node and a connected WpTestimonial"""
-interface WpTestimonialConnectionEdge implements Edge {
-  """
-  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
-  """
-  cursor: String
-
-  """The connected WpTestimonial Node"""
-  node: WpTestimonial!
-}
-
-"""Page Info on the connected WpTestimonialConnectionEdge"""
-interface WpTestimonialConnectionPageInfo implements PageInfo & WPPageInfo {
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """
-  Get information about the offset pagination state in the current connection
-  """
-  offsetPagination: OffsetPaginationPageInfo
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-}
-
-"""The Type of Identifier used to fetch a single resource. Default is ID."""
-enum WpTestimonialIdType {
-  """Identify a resource by the Database ID."""
-  DATABASE_ID
-
-  """Identify a resource by the (hashed) Global ID."""
-  ID
-
-  """
-  Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
-  """
-  SLUG
-
-  """Identify a resource by the URI."""
-  URI
-}
-
-"""Connection between the WpTestimonial type and the WpTestimonial type"""
-type WpTestimonialToPreviewConnectionEdge implements Edge & OneToOneConnection & WpTestimonialConnectionEdge {
-  """
-  Opaque reference to the nodes position in the connection. Value can be used with pagination args.
-  """
-  cursor: String
-
-  """The node of the connection, without the edges"""
-  node: WpTestimonial!
-}
-
-"""Field Group"""
-type WpTestimonial_WpTestimonial implements AcfFieldGroup {
-  """"""
-  designation: String
-
-  """The name of the ACF Field Group"""
-  fieldGroupName: String
-
-  """"""
-  logo: MediaItem
-
-  """"""
-  review: String
-
-  """"""
-  userName: String
 }
 
 """The writing setting type"""

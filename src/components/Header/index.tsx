@@ -40,10 +40,10 @@ export default function Header() {
               <Link href={"/ResidencyVisa"}>Residency Visa</Link>
             </div>
             <div>
-              <Link href={"/businessServices"}>Bussiness Services</Link>
+              <Link href={"/BusinessServices"}>Bussiness Services</Link>
             </div>
             <div>
-              <Link href={"/businessSetup"}>Bussiness Setup</Link>
+              <Link href={"/WhyUs"}>Why Us</Link>
             </div>
             <div>
               <Link href={"/resource"}>Resources</Link>
