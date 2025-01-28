@@ -43,10 +43,10 @@ export default function Header() {
               <Link href={"/BusinessServices"}>Bussiness Services</Link>
             </div>
             <div>
-              <Link href={"/WhyUs"}>Why Us</Link>
+              <Link href={"/BusinessSetup"}>Business Setup</Link>
             </div>
             <div>
-              <Link href={"/resource"}>Resources</Link>
+              <Link href={"/Resource"}>Resources</Link>
             </div>
             <div>
               <Link href={"/contactUs"} className="rounded-white-btn">
