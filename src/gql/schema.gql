@@ -1586,6 +1586,9 @@ input CommentToCommentConnectionWhereArgs {
   """Comment status to limit results by."""
   status: String
 
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
+
   """Include comments for a specific user ID."""
   userId: ID
 }
@@ -1732,6 +1735,9 @@ input CommentToParentCommentConnectionWhereArgs {
 
   """Comment status to limit results by."""
   status: String
+
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
 
   """Include comments for a specific user ID."""
   userId: ID
@@ -3679,6 +3685,9 @@ interface EnqueuedAsset {
   """Extra information needed for the script"""
   extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
 
+  """The loading group to which this asset belongs."""
+  group: Int
+
   """The handle of the enqueued asset"""
   handle: String
 
@@ -3716,6 +3725,12 @@ type EnqueuedScript implements EnqueuedAsset & Node {
 
   """Extra data supplied to the enqueued script"""
   extraData: String
+
+  """The loading group to which this asset belongs."""
+  group: Int
+
+  """The location where this script should be loaded"""
+  groupLocation: ScriptLoadingGroupLocationEnum
 
   """The handle of the enqueued asset"""
   handle: String
@@ -3799,6 +3814,9 @@ type EnqueuedStylesheet implements EnqueuedAsset & Node {
 
   """Extra information needed for the script"""
   extra: String @deprecated(reason: "Use `EnqueuedScript.extraData` instead.")
+
+  """The loading group to which this asset belongs."""
+  group: Int
 
   """The handle of the enqueued asset"""
   handle: String
@@ -5155,6 +5173,9 @@ input MediaItemToCommentConnectionWhereArgs {
 
   """Comment status to limit results by."""
   status: String
+
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
 
   """Include comments for a specific user ID."""
   userId: ID
@@ -7013,6 +7034,9 @@ input PageToCommentConnectionWhereArgs {
   """Comment status to limit results by."""
   status: String
 
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
+
   """Include comments for a specific user ID."""
   userId: ID
 }
@@ -8778,6 +8802,9 @@ input PostToCommentConnectionWhereArgs {
 
   """Comment status to limit results by."""
   status: String
+
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
 
   """Include comments for a specific user ID."""
   userId: ID
@@ -11612,6 +11639,9 @@ input RootQueryToCommentConnectionWhereArgs {
   """Comment status to limit results by."""
   status: String
 
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
+
   """Include comments for a specific user ID."""
   userId: ID
 }
@@ -13837,6 +13867,17 @@ type RootQueryToUserRoleConnectionPageInfo implements PageInfo & UserRoleConnect
 
   """When paginating backwards, the cursor to continue."""
   startCursor: String
+}
+
+"""Location in the document where the script to be loaded"""
+enum ScriptLoadingGroupLocationEnum {
+  """
+  A script to be loaded in document at right before the closing `<body>` tag
+  """
+  FOOTER
+
+  """A script to be loaded in document `<head>` tag"""
+  HEADER
 }
 
 """The strategy to use when loading the script"""
@@ -16837,6 +16878,9 @@ input UserToCommentConnectionWhereArgs {
 
   """Comment status to limit results by."""
   status: String
+
+  """One or more Comment Statuses to limit results by"""
+  statusIn: [CommentStatusEnum]
 
   """Include comments for a specific user ID."""
   userId: ID

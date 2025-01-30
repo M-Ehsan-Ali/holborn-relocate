@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         outfit: ['"Outfit"', "sans-serif"],
+        alata: ['"Alata"', "sans-serif"],
       },
       colors: {
         background: "var(--background)",

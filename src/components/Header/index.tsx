@@ -30,10 +30,10 @@ export default function Header() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex gap-x-5 text-white justify-end">
+          <div className="hidden lg:flex gap-x-5 text-white justify-end items-center">
             <div>
               <Link href={"/"} className="rounded-red-btn">
-                Business Setup
+                Home
               </Link>
             </div>
             <div>
@@ -49,7 +49,7 @@ export default function Header() {
               <Link href={"/Resource"}>Resources</Link>
             </div>
             <div>
-              <Link href={"/contactUs"} className="rounded-white-btn">
+              <Link href={"/ContactUs"} className="rounded-white-btn">
                 Contact Us
               </Link>
             </div>
