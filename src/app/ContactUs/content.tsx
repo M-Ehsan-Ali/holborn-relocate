@@ -1,6 +1,6 @@
 export default function ContactUs() {
   return (
-    <div id="ContactUs" className="mb-[300px] mt-[148px]">
+    <div id="ContactUs" className="mt-[148px]">
       {/* Success Section */}
       <div className="flex px-[72px] gap-[40px]">
         <div className="flex flex-col gap-[55px] items-center w-[60%] text-center pt-[94px]">
@@ -80,6 +80,34 @@ export default function ContactUs() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Gateway Section */}
+      <div className="bg-white p-[50px_40px] flex gap-[60px] mt-[174px]">
+        <div className="w-[50%]">
+          <img src="/contactUs/map.png" alt="map" className="w-full h-[100%]" />
+        </div>
+        <div className="w-[50%] flex flex-col gap-[12px]">
+          <p className="font-outfit font-bold text-[39px] mt-[77px]">
+            Dubai, UAE – A gateway to global business opportunities.
+          </p>
+          <p className="font-alata font-normal text-[24px]">
+            Dubai offers a prime location for businesses and professionals,
+            strategically positioned between Europe, Asia, and Africa. With its
+            world-class infrastructure, business-friendly policies, and vibrant
+            lifestyle, Dubai is the perfect destination for UK companies and
+            nationals looking to expand their horizons.
+          </p>
+          <p className="font-outfit font-bold text-[27px]">
+            Headquarter: Dubai, Asia | 123 Tech Boulocard Suite 456
+          </p>
+          <p className="font-alata font-normal text-[26px]">
+            Visit our office to locate your business in Dubai now!
+          </p>
+          <button className="font-outfit text-[32px] font-bold text-white p-[22px_30px] bg-[#002470] rounded-[19px] w-fit">
+            Connecting Near & Far
+          </button>
         </div>
       </div>
     </div>

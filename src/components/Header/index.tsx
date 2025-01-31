@@ -54,7 +54,7 @@ export default function Header() {
               </Link>
             </div>
             <div>
-              <Link href={"/schedulMeeting"} className="rounded-red-btn">
+              <Link href={"/ScheduleMeeting"} className="rounded-red-btn">
                 Schedule a Meeting
               </Link>
             </div>
@@ -100,7 +100,7 @@ export default function Header() {
             <div className="w-[150px] h-[1px] bg-black" />
 
             <div className="font-semibold py-3">
-              <Link href={"/schedulMeeting"} onClick={handleMenuClick}>
+              <Link href={"/ScheduleMeeting"} onClick={handleMenuClick}>
                 Book a meeting
               </Link>
             </div>
