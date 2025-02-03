@@ -15,12 +15,21 @@ export default function Header() {
     <div>
       <div className="relative z-[9]">
         {/* Fixed Header */}
-        <div className="pl-4 lg:pl-8 pr-5 lg:pr-16 lg:pt-8 flex items-center justify-between 2xl:static absolute top-0 left-0  w-full z-40">
+        <div className="p-4 lg:pl-8 pr-5 lg:pr-16 lg:pt-8 flex items-center justify-between 2xl:static absolute top-0 left-0  w-full z-40">
           {/* Logo Section */}
           <Link href={"/"}>
-            <div className="flex flex-col justify-center items-center">
+            <div className="hidden lg:flex flex-col justify-center items-center">
               <Image
                 src="/logo.png"
+                height={100}
+                width={150}
+                alt="holborn"
+                loading="lazy"
+              />
+            </div>
+            <div className="flex lg:hidden flex-col justify-center items-center">
+              <Image
+                src="/mobIcon.svg"
                 height={100}
                 width={150}
                 alt="holborn"
@@ -66,7 +75,13 @@ export default function Header() {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <div className="w-8 h-8 flex items-center justify-center cursor-pointer">
-              <span className="text-2xl">{isMenuOpen ? "X" : "•••"}</span>
+              <span className="text-2xl">
+                {isMenuOpen ? (
+                  <img src="/Multiply.svg" alt="X" />
+                ) : (
+                  <img src="/Menu.svg" alt="menu" />
+                )}
+              </span>
             </div>
           </div>
         </div>
@@ -74,41 +89,79 @@ export default function Header() {
         {/* Fixed Drawer Menu with Transition */}
         {isMenuOpen && (
           <div
-            className="fixed top-[100px] left-0 bg-white text-black w-64 h-full flex flex-col px-8 pb-8 pt-2 z-30 overflow-y-auto transition-transform duration-300 ease-in-out"
+            className="fixed top-[100px] left-0 bg-[#002470] text-white w-full h-full flex flex-col px-8 pb-8 pt-2 z-30 overflow-y-auto transition-transform duration-300 ease-in-out"
             style={{
               transform: isMenuOpen ? "translateX(0)" : "translateX(-100%)",
             }}
           >
             {/* Menu Links */}
             <div className="font-semibold py-3">
-              <Link href={"/"} onClick={handleMenuClick}>
-                Home
+              <Link
+                href={"/"}
+                onClick={handleMenuClick}
+                className="flex justify-between items-center"
+              >
+                <p>Home</p>
+                {">"}
               </Link>
             </div>
-            <div className="w-[150px] h-[1px] bg-black" />
             <div className="font-semibold py-3">
-              <Link href={"/ResidencyVisa"} onClick={handleMenuClick}>
-                Residency Visa
+              <Link
+                href={"/BusinessSetup"}
+                onClick={handleMenuClick}
+                className="flex justify-between items-center"
+              >
+                <p>Bussiness Setup</p>
+                {">"}
               </Link>
             </div>
-            <div className="w-[150px] h-[1px] bg-black" />
-            <div className="font-semibold py-3">
-              <Link href={"/businessServices"} onClick={handleMenuClick}>
-                Bussiness Service
-              </Link>
-            </div>
-            <div className="w-[150px] h-[1px] bg-black" />
 
             <div className="font-semibold py-3">
-              <Link href={"/ScheduleMeeting"} onClick={handleMenuClick}>
-                Book a meeting
+              <Link
+                href={"/ResidencyVisa"}
+                onClick={handleMenuClick}
+                className="flex justify-between items-center"
+              >
+                <p>Residency Visa</p>
+                {">"}
               </Link>
             </div>
-            <div className="w-[150px] h-[1px] bg-black" />
-
             <div className="font-semibold py-3">
-              <Link href={"/contactUs"} onClick={handleMenuClick}>
+              <Link
+                href={"/BusinessServices"}
+                onClick={handleMenuClick}
+                className="flex justify-between items-center"
+              >
+                <p>Bussiness Service</p>
+                {">"}
+              </Link>
+            </div>
+            <div className="font-semibold py-3">
+              <Link
+                href={"/Resource"}
+                onClick={handleMenuClick}
+                className="flex justify-between items-center"
+              >
+                <p>Resource</p>
+                {">"}
+              </Link>
+            </div>
+            <div className="font-semibold py-3 rounded-white-btn mt-[24px]">
+              <Link
+                href={"/ContactUs"}
+                onClick={handleMenuClick}
+                className="flex justify-center items-center"
+              >
                 Contact Us
+              </Link>
+            </div>
+            <div className="font-semibold py-3 rounded-red-btn mt-[16px]">
+              <Link
+                href={"/ScheduleMeeting"}
+                onClick={handleMenuClick}
+                className="flex justify-center items-center"
+              >
+                Schedule a Meeting
               </Link>
             </div>
           </div>

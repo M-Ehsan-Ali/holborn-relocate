@@ -13,3 +13,14 @@
   font-size: 22px;
   font-weight: bold;
 }
+@media only screen and (max-width: 500px) {
+  .rounded-white-btn {
+    font-size: 16px;
+    padding: 8px 18px;
+  }
+  .square-red-btn,
+  .rounded-red-btn {
+    font-size: 16px;
+    padding: 8px 18px;
+  }
+}

@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function StartJourney() {
   return (
-    <div className="bg-[#103582] pt-[60px] px-[220px] flex flex-col items-center">
-      <div className="flex gap-[82px]">
-        <div className="flex flex-col gap-[52px] min-w-[257px]">
+    <div className="bg-[#103582] pt-[60px] px-[12px] sm:px-[220px] flex flex-col items-center">
+      <div className="flex gap-[12px] sm:gap-[82px]">
+        <div className="flex flex-col gap-[12px] sm:gap-[52px] min-w-[84px] sm:min-w-[257px]">
           <Image
             src="/JourneyTopLeft.png"
             width="257"
@@ -22,25 +22,18 @@ export default function StartJourney() {
             className="transform rotate-[-15deg]"
           />
         </div>
-        <div className="text-white flex flex-col gap-[52px] text-center items-center">
-          <p className="font-outfit font-normal text-[40px]">
+        <div className="text-white flex flex-col gap-[24px] sm:gap-[52px] text-center items-center">
+          <p className="font-outfit font-normal text-[14px] sm:text-[40px]">
             Start Your Journey with Holborn Relocate
           </p>
-          <p className="font-outfit font-normal text-[30px]">
+          <p className="font-outfit font-normal text-[12px] sm:text-[30px]">
             Ready to make your move to Dubai? Our team is here to guide you
             through every step of the process. Whether you’re ready to start
             your visa application or have questions, we’re here for you.
           </p>
-          <button
-            className="square-red-btn w-fit"
-            style={{
-              padding: "16px 46px !important",
-            }}
-          >
-            Book a meeting{" "}
-          </button>
+          <button className="square-red-btn w-fit">Book a meeting </button>
         </div>
-        <div className="flex flex-col gap-[52px] min-w-[257px]">
+        <div className="flex flex-col gap-[12px] sm:gap-[52px] min-w-[84px] sm:min-w-[257px]">
           <Image
             src="/JourneyTopRight.png"
             width="249"

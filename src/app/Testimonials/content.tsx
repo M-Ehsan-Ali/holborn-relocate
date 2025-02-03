@@ -1,6 +1,6 @@
 "use client";
 
-import clsx from "clsx"; // For dynamic className merging
+import clsx from "clsx";
 import { useState } from "react";
 
 interface Testimonial {
@@ -19,6 +19,7 @@ interface ContentProps {
 export default function Content({ testimonials }: ContentProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
+  const [isAlternateStyle, setIsAlternateStyle] = useState(false);
 
   // Handlers for carousel navigation
   const handleNext = () => {
@@ -28,6 +29,7 @@ export default function Content({ testimonials }: ContentProps) {
       setCurrentIndex((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
+      setIsAlternateStyle((prev) => !prev);
       setTransitioning(false);
     }, 300); // Match transition duration
   };
@@ -39,6 +41,7 @@ export default function Content({ testimonials }: ContentProps) {
       setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
       );
+      setIsAlternateStyle((prev) => !prev);
       setTransitioning(false);
     }, 300); // Match transition duration
   };
@@ -47,61 +50,70 @@ export default function Content({ testimonials }: ContentProps) {
 
   return (
     <>
-      <div className="py-8 md:py-12 px-6 md:px-8 bg-color_0166C8 w-full relative  md:min-h-[450px]">
-        {/* Grid Layout for LinkedIn Image, Testimonial Logo, Title, Designation */}
-        <div
-          className={clsx(
-            "grid grid-cols-5 items-center transition-opacity duration-300",
-            transitioning ? "opacity-0" : "opacity-100"
-          )}
-        >
-          {/* Static LinkedIn Image */}
-          <div>
-            <img
-              src="/testimonials/linkedin.png"
-              alt="LinkedIn"
-              className="w-[50px] h-[50px] md:w-[120px] md:h-[120px]"
-            />
-          </div>
-
-          {/* Dynamic Title and Designation */}
-          <div className="col-span-3">
-            <div className="flex flex-col items-center">
-              <div className="text-[12px] md:text-[30px] font-bold text-white text-center">
-                {currentTestimonial.title}
-              </div>
-              <div className="text-[12px] md:text-[30px] font-bold text-white text-center">
-                {`(${currentTestimonial.designation})`}
+      <div className="hidden sm:flex gap-[56px] justify-center pt-[64px]">
+        {testimonials.map((item, index) => (
+          <div
+            key={index}
+            className={clsx(
+              "flex flex-col items-center gap-[20px] w-[519px] py-[60px] px-[20px] rounded-[10px]",
+              transitioning ? "opacity-0" : "opacity-100",
+              index % 2 !== 0
+                ? "text-white bg-gradient-to-b from-[#002470] to-[#CF142B]"
+                : "text-black bg-white"
+            )}
+          >
+            <div className="flex flex-col items-center gap-[20px] text-center h-full justify-between">
+              <p className="font-outfit font-normal text-[22px]">
+                {item.review}
+              </p>
+              <div
+                className={clsx(
+                  "w-[299px] h-[1px]",
+                  index % 2 !== 0 ? "bg-white" : "bg-black"
+                )}
+              ></div>
+              <div>
+                <p className="text-[27px]">
+                  <span className="font-bold">{item.title}</span>{" "}
+                  {item.designation}
+                </p>
               </div>
             </div>
-            <div className="w-full flex justify-center mt-3 md:mt-8">
-              <div className="h-[2px] w-[104px] md:w-[320px] bg-white" />
-            </div>
           </div>
-
-          {/* Dynamic Testimonial Logo */}
-          <div className="flex justify-end">
-            <img
-              src={currentTestimonial.logo.mediaItemUrl}
-              alt={`${currentTestimonial.title} Logo`}
-              className="w-[40px] h-[40px] md:w-[90px] md:h-[90px]"
-            />
-          </div>
-        </div>
-
-        {/* Dynamic Review */}
+        ))}
+      </div>
+      <div className="w-full relative sm:hidden">
         <div
           className={clsx(
-            "mt-4 md:mt-8 text-center px-6 md:px-16 font-medium text-[11px] md:text-[22px] text-white transition-opacity duration-300",
-            transitioning ? "opacity-0" : "opacity-100"
+            "flex flex-col items-center gap-[20px] sm:w-[519px] py-[20px] sm:py-[60px] px-[20px] rounded-[10px] mt-[32px] sm:mt-[0px]",
+            transitioning ? "opacity-0" : "opacity-100",
+            isAlternateStyle
+              ? "text-white bg-gradient-to-b from-[#002470] to-[#CF142B]"
+              : "text-black bg-white"
           )}
         >
-          {currentTestimonial.review}
+          <div className="flex flex-col items-center gap-[20px] text-center">
+            <p className="font-outfit font-normal text-[16px] sm:text-[22px]">
+              {currentTestimonial.review}
+            </p>
+            <div
+              className={clsx(
+                "w-[250px] h-[1px]",
+                isAlternateStyle ? "bg-white" : "bg-black"
+              )}
+            ></div>
+            <div>
+              <p className="text-[14px] sm:text-[27px]">
+                <span className="font-bold">{currentTestimonial.title}</span>{" "}
+                {currentTestimonial.designation}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Left Arrow */}
         <div
-          className="absolute left-4 top-[50%] transform -translate-y-1/2 cursor-pointer"
+          className="absolute right-8 bottom-[-90px] transform -translate-y-1/2 cursor-pointer sm:hidden"
           onClick={handlePrevious}
         >
           <img
@@ -113,7 +125,7 @@ export default function Content({ testimonials }: ContentProps) {
 
         {/* Right Arrow */}
         <div
-          className="absolute right-4 top-[50%] transform -translate-y-1/2 cursor-pointer"
+          className="absolute right-1 bottom-[-90px] transform -translate-y-1/2 cursor-pointer sm:hidden"
           onClick={handleNext}
         >
           <img
@@ -121,23 +133,6 @@ export default function Content({ testimonials }: ContentProps) {
             className="w-[24px] md:w-[60px]"
             alt="Next"
           />
-        </div>
-
-        {/* Navigation Balls */}
-      </div>
-
-      <div className="pt-10 pb-4 md:pt-20 md:pb-0">
-        <div className="flex justify-center space-x-2">
-          {testimonials.map((_, index) => (
-            <div
-              key={index}
-              className={clsx(
-                "w-[16px] h-[16px] rounded-full cursor-pointer",
-                index === currentIndex ? "bg-black" : "bg-color_0166C8"
-              )}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
         </div>
       </div>
     </>

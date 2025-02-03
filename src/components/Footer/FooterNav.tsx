@@ -12,7 +12,7 @@ export default function FooterNav() {
                 <div className="md:pl-4">
                   <div className="text-center">
                     <Image
-                      src="/logo.png"
+                      src="/mobIcon.svg"
                       height={140}
                       width={225}
                       alt="Holborn"
@@ -75,7 +75,7 @@ export default function FooterNav() {
                 Company
               </p>
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex sm:block w-[98%] sm:w-auto flex-wrap">
               <p className="py-3 px-6 lg:px-5 lg:py-3 text-[14px] lg:text-[22px] font-overpass font-medium">
                 Business Setup
               </p>
@@ -109,7 +109,7 @@ export default function FooterNav() {
                       <input
                         name="name"
                         type="text"
-                        className="bg-white w-[380px] h-[64px] rounded-[5px] px-2 text-[20px] placeholder:text-[#969696] text-gray-700"
+                        className="bg-white sm:w-[380px] h-[64px] rounded-[5px] px-2 text-[20px] placeholder:text-[#969696] text-gray-700"
                         placeholder="Name*"
                         required
                       />
@@ -119,7 +119,7 @@ export default function FooterNav() {
                       <input
                         name="phone_no"
                         type="text"
-                        className="bg-white w-[380px] h-[64px] rounded-[5px] px-2 py-2 text-[20px] placeholder:text-[#969696] text-gray-700"
+                        className="bg-white sm:w-[380px] h-[64px] rounded-[5px] px-2 py-2 text-[20px] placeholder:text-[#969696] text-gray-700"
                         placeholder="Phone no*"
                         required
                       />
@@ -129,7 +129,7 @@ export default function FooterNav() {
                       <input
                         name="company_setup"
                         type="text"
-                        className="bg-white w-[380px] h-[64px] rounded-[5px] px-2 py-2 text-[20px] placeholder:text-[#969696] text-gray-700"
+                        className="bg-white sm:w-[380px] h-[64px] rounded-[5px] px-2 py-2 text-[20px] placeholder:text-[#969696] text-gray-700"
                         placeholder="Company Setup*"
                         required
                       />
