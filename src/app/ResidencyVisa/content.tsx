@@ -1,24 +1,25 @@
 import Image from "next/image";
-import FlyingPlane from "./FlyingPlane";
 
 export default function ResidencyVisa() {
   return (
     <div id="ResidencyVisa">
       {/* Hero Section */}
       <div
-        className="w-[100%] h-[1480px] relative -top-[150px] bg-cover bg-center bg-no-repeat flex justify-between items-center px-[64px]"
+        className="w-[100%] h-[630px] sm:h-[1480px] relative -top-[150px] bg-cover bg-center bg-no-repeat flex sm:flex-row flex-col-reverse justify-start sm:justify-between items-center sm:px-[64px]"
         style={{
           backgroundImage: "url('/residencyVisa/residenceHeroBg.png')",
         }}
       >
-        <div className="text-white flex items-center flex-col justify-center">
-          <FlyingPlane />
-          <div className="flex flex-col items-center gap-[20px] w-[740px]">
-            <p className="text-white text-center font-inter font-bold text-[45px]">
+        <div className="text-white flex items-center flex-col justify-center mb-[30px] sm-mb-[0px]">
+          <div className="relative -left-[112px] hidden sm:block">
+            <img src="/residencyVisa/vectorplane.png" alt="plane" />
+          </div>
+          <div className="flex flex-col items-center gap-[20px] w-auto sm:w-[740px] px-[20px] sm:px-[0px]">
+            <p className="text-white text-center font-inter font-bold text-[14px] sm:text-[45px]">
               Your Gateway to a New Life:{" "}
               <span className="text-[#CF142B]">Dubai Residency Visa</span>
             </p>
-            <p className="font-outfit font-medium text-[28px] max-w-[575px] text-center">
+            <p className="font-outfit font-medium text-[12px] sm:text-[28px] max-w-[575px] text-center">
               Seamlessly transition to Dubai with expert visa assistance. Enjoy
               a tax-free lifestyle, world-class amenities, and unmatched
               opportunities in a global hub
@@ -33,7 +34,16 @@ export default function ResidencyVisa() {
         </div>
         <div>
           <div className="flex items-center justify-center">
-            <div>
+            <div className="block sm:hidden pr-[20px]">
+              <Image
+                src="/residencyVisa/heroImage.png"
+                width="964"
+                loading="lazy"
+                height={1036}
+                alt="main image midd"
+              />
+            </div>
+            <div className="hidden sm:block">
               <Image
                 src="/residencyVisa/residenceHeroImage.png"
                 width="964"
@@ -47,17 +57,17 @@ export default function ResidencyVisa() {
       </div>
       {/* Personalised Guidance for Your Residency Visa section starts here */}
       <div
-        className="w-[100%] flex justify-between items-start px-[64px] bg-cover bg-center bg-no-repeat"
+        className="w-[100%] flex justify-between items-start px-[20px] sm:px-[64px] bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `url('/residencyVisa/Ellipse.png')`,
         }}
       >
-        <div className="text-white flex items-center flex-col justify-center">
-          <div className="flex flex-col items-center gap-[20px] w-[740px] z-[9]">
-            <p className="text-white text-center font-inter font-bold text-[45px]">
+        <div className="text-white flex items-left sm:items-center flex-col justify-center w-[80%] sm:w-auto">
+          <div className="flex flex-col items-center gap-[20px] w-auto sm:w-[740px] z-[9]">
+            <p className="text-white text-center font-inter font-bold text-[12px] sm:text-[45px]">
               Personalised Guidance for Your Residency Visa
             </p>
-            <p className="font-outfit font-medium text-[28px] max-w-[575px] text-center">
+            <p className="font-outfit font-medium text-[12px] sm:text-[28px] max-w-auto sm:max-w-[575px] text-center">
               {/* <Image
                 height={686}
                 width={727}
@@ -69,18 +79,19 @@ export default function ResidencyVisa() {
               confidence. Our experts provide tailored advice, ensuring your
               visa application aligns with your unique needs and circumstances.
             </p>
-            <div className="flex justify-center gap-[35px]">
-              <button className="rounded-red-btn">
+            <div className="flex justify-center gap-[0px] sm:gap-[35px]">
+              <button className="rounded-red-btn text-[12px] sm:flex">
                 Book a consultation
-                <span className="text-[22px] text-white">&#8594;</span>
+                <span className="text-[22px] text-white hidden sm:block">
+                  &#8594;
+                </span>
               </button>
             </div>
           </div>
-          <div className="w-[100%] mt-[180px]">
+          <div className="w-[100%] mt-[180px] hidden sm:block">
             <div className="flex justify-center">
-              <Image
-                height={460}
-                width={500}
+              <img
+                className="w-auto sm:w-[500px] h-auto sm:h-[460px]"
                 alt="Visa"
                 src="/residencyVisa/personaliseVisaGirl.png"
               />
@@ -134,7 +145,12 @@ export default function ResidencyVisa() {
           </div>
         </div>
         <div>
-          <div className="flex items-center justify-center  ">
+          <img
+            src="/residencyVisa/twoarbioneenglish.png"
+            alt="visa"
+            className="sm:hidden"
+          />
+          <div className="sm:flex items-center justify-center hidden">
             <div className="relative">
               <Image
                 src="/residencyVisa/guidMainImage.png"
@@ -156,94 +172,21 @@ export default function ResidencyVisa() {
           </div>
         </div>
       </div>
+      <div className="sm:hidden mt-[48px] px-[30px]">
+        <img src="/residencyVisa/options.png" alt="options" />
+      </div>
       {/* Key Requirements for a Dubai Residency Visa section starts here */}
 
       <div
-        className="bg-no-repeat bg-right py-[220px] px-[25px] flex"
+        className="bg-no-repeat bg-right py-[220px] px-[25px] hidden sm:flex"
         style={{
           backgroundImage: `url('/residencyVisa/globe.png')`,
         }}
       >
-        <div className="relative">
-          <div className="bg-[#CF142B] w-[150px] h-[150px] rounded-[50%] flex items-center justify-center absolute right-[-5%] top-[-5%]">
-            <Image
-              src="/residencyVisa/checkMark.png"
-              width={70}
-              loading="lazy"
-              height={70}
-              alt="top right Check Mark"
-            />
-          </div>
-          <Image
-            src="/residencyVisa/visaPlane.png"
-            width={952}
-            loading="lazy"
-            height={924}
-            alt="bottom left image"
-          />
-          <div className="absolute bottom-[0%] left-[0%]">
-            <Image
-              src="/residencyVisa/Group.png"
-              width={300}
-              loading="lazy"
-              height={247}
-              alt="bottom left image"
-            />
-          </div>
-        </div>
-        <div className="text-center relative">
-          <p className="text-white font-outfit font-bold text-[50px] mt-[125px] mb-[64px]">
-            Key Requirements for a Dubai Residency Visa
-          </p>
-          <div className="bg-[#CF142B] rounded-[30px]  px-[20px] px-[20px] py-[70px] flex flex-col gap-[60px] absolute bottom-[-30%] left-[-120px]">
-            <div>
-              <div className="flex gap-[20px] items-center bg-[#FFFFFF] py-[30px] px-[12px] rounded-[30px] w-[95%]">
-                <Image
-                  src="/residencyVisa/checkMark.png"
-                  width={70}
-                  loading="lazy"
-                  height={70}
-                  alt="top right Check Mark"
-                />
-                <p className="font-outfit font-normal text-[30px] text-[#000000]">
-                  Valid Passport: Must be valid for at least six months.
-                </p>
-              </div>
-            </div>
-            <div className="flex justify-end">
-              <div className="flex gap-[20px] items-center bg-[#FFFFFF] py-[30px] px-[12px] rounded-[30px] w-[95%]">
-                <div>
-                  <Image
-                    src="/residencyVisa/checkMark.png"
-                    width={70}
-                    loading="lazy"
-                    height={70}
-                    alt="top right Check Mark"
-                  />
-                </div>
-                <p className="font-outfit font-normal text-[30px] text-[#000000]">
-                  Proof of Income/Employment: Employment contract or proof of
-                  business ownership.
-                </p>
-              </div>
-            </div>
-            <div>
-              <div className="flex gap-[20px] items-center bg-[#FFFFFF] py-[30px] px-[12px] rounded-[30px] w-[95%]">
-                <Image
-                  src="/residencyVisa/checkMark.png"
-                  width={70}
-                  loading="lazy"
-                  height={70}
-                  alt="top right Check Mark"
-                />
-                <p className="font-outfit font-normal text-[30px] text-[#000000]">
-                  Health Insurance: Valid health insurance coverage for all
-                  applicants.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <img src="/residencyVisa/keyFrame.png" alt="desktop frame" />
+      </div>
+      <div className="block sm:hidden">
+        <img src="/residencyVisa/keyFrameMobile.png" alt="mobile frame" />
       </div>
     </div>
   );

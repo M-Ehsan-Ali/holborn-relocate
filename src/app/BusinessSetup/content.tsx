@@ -2,7 +2,10 @@ export default function BusinessSetup() {
   return (
     <div id="businessSetup" className="mb-[330px]">
       {/* Hero Section */}
-      <div className="px-[40px]">
+      <div className="block sm:hidden mt-[24px]">
+        <img src="/businessSetup/heroMobile.png" alt="" />
+      </div>
+      <div className="px-[40px] hidden sm:block">
         <div className="relative h-[1247px]">
           <img src="/businessSetup/heroImage.png" alt="heroImage" />
           <div className="text-[#FFFFFF] absolute right-[56px] bottom-[100px] rounded-[50px] px-[16px] py-[56px] flex flex-col gap-[28px] bg-[#CF142B] text-center w-[816px] items-center">

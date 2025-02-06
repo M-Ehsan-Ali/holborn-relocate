@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div id="home">
       {/* Hero Section */}
-      <div className="flex flex-col-reverse items-center sm:items-unset sm:flex-row justify-between sm:p-[60px] mt-[50px] sm:mt-[140px] sm:mr-[60px] sm:gap-[0px] gap-[58px]">
+      <div className="flex flex-col-reverse items-center sm:items-unset sm:flex-row justify-between sm:p-[60px] mt-[50px] sm:mt-[0px] sm:mr-[0px] sm:gap-[0px] gap-[58px]">
         <div className="text-white flex items-center">
           <div className="flex flex-col items-center gap-[20px]">
             <p className="text-white flex items-center sm:font-inter font-bold sm:text-[45px] text-[16px]">
@@ -28,41 +28,7 @@ export default function Home() {
         </div>
         <div className="hidden lg:flex">
           <div className="flex items-center justify-center relative">
-            <div className="p-[24px] absolute top-[-15%] left-[-35%] bg-[rgba(255,_255,_255,_0.3)] rounded-[10px] max-w-[450px]">
-              <p className="text-center text-white">
-                Holborn Relocate, led by Stephen Quinn, ensures a smooth
-                transition with expert visa and relocation services. Trust us to
-                make your move stress-free, whether for individuals or
-                businesses
-              </p>
-            </div>
-            <div className="absolute top-[-25%] right-[-10%]">
-              <Image
-                src="/topRightHeroImage.png"
-                width="257"
-                loading="lazy"
-                height={203}
-                alt="top right image"
-              />
-            </div>
-            <div>
-              <Image
-                src="/mainHeroImage.png"
-                width="709"
-                loading="lazy"
-                height={633}
-                alt="main image midd"
-              />
-            </div>
-            <div className="absolute bottom-[-20%] left-[-20%]">
-              <Image
-                src="/bottomLeftHeroImage.png"
-                width="326"
-                loading="lazy"
-                height={228}
-                alt="bottom left image"
-              />
-            </div>
+            <img src="/heroImage.png" alt="hero" />
           </div>
         </div>
       </div>
