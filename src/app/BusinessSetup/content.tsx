@@ -84,7 +84,11 @@ export default function BusinessSetup() {
 
       {/* Is Dubai Safe Section */}
       <div className="mt-[52px] sm:mt-[305px] sm:px-[70px]">
-        <img src="/businessSetup/safeBusiness.svg" alt="safe dubai" />
+        <img
+          src="/businessSetup/safeBusiness.svg"
+          alt="safe dubai"
+          className="sm:hidden"
+        />
         <div className="relative hidden sm:flex">
           <div className="z-[2]">
             <img src="/businessSetup/secure.png" alt="secure" />
