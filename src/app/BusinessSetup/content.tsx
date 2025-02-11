@@ -1,6 +1,6 @@
 export default function BusinessSetup() {
   return (
-    <div id="businessSetup" className="mb-[330px]">
+    <div id="businessSetup" className="mb-[80px] sm:mb-[330px]">
       {/* Hero Section */}
       <div className="block sm:hidden mt-[24px]">
         <img src="/businessSetup/heroMobile.png" alt="" />
@@ -21,46 +21,58 @@ export default function BusinessSetup() {
         </div>
       </div>
       {/* Why Dubai Section */}
-      <div className="flex flex-col gap-[56px] items-center px-[100px] mt-[150px]">
-        <div className="text-[45px] font-outfit font-medium text-white">
+      <div className="flex flex-col gap-[24px] sm:gap-[56px] items-center px-[16px] sm:px-[100px] mt-[50px] sm:mt-[150px]">
+        <div className="sm:text-[45px] text-[14px] font-outfit font-medium text-white">
           Why Dubai is the Ideal Destination for Your Business?
         </div>
-        <div className="text-[34px] font-alata font-normal text-white">
+        <div className="sm:text-[34px] text-[12px] font-alata font-normal text-white">
           Dubai offers unmatched advantages for entrepreneurs and businesses
           seeking global growth. Its strategic location, tax-free benefits, and
           robust infrastructure create the perfect environment for success.
         </div>
-        <div className="flex gap-[24px]">
-          <div className="p-[35px] bg-[#CF142B] rounded-[20px] flex flex-col gap-[38px] items-center">
-            <img src="/businessSetup/Bill.svg" alt="bill" />
-            <p className="font-outfit text-[40px] font-bold text-white text-center">
+        <div className="flex gap-[12px] sm:gap-[24px] flex-wrap sm:flex-nowrap justify-center">
+          <div className="sm:p-[35px] w-[40%] sm:w-auto p-[16px_4px] bg-[#CF142B] rounded-[6px] sm:rounded-[20px] flex flex-col gap-[2px] sm:gap-[38px] items-center">
+            <img
+              src="/businessSetup/Bill.svg"
+              alt="bill"
+              className="w-[28px] sm:w-auto"
+            />
+            <p className="font-outfit text-[8px] sm:text-[40px] font-bold text-white text-center">
               Tax-Free Business Environment
             </p>
-            <p className="font-alata font-normal text-[28px] text-white text-center">
+            <p className="font-alata font-normal text-[7px] sm:text-[28px] text-white text-center">
               Operating in Dubai means enjoying a tax-free status, allowing you
               to reinvest profits directly into your business. This financial
               edge makes Dubai an attractive hub for maximizing growth
               opportunities.
             </p>
           </div>
-          <div className="p-[35px] bg-[#CF142B] rounded-[20px] flex flex-col gap-[38px] items-center">
-            <img src="/businessSetup/Bill.svg" alt="bill" />
-            <p className="font-outfit text-[40px] font-bold text-white text-center">
+          <div className="sm:p-[35px] w-[40%] sm:w-auto p-[16px_4px] bg-[#CF142B] rounded-[6px] sm:rounded-[20px] flex flex-col gap-[2px] sm:gap-[38px] items-center">
+            <img
+              src="/businessSetup/Bill.svg"
+              alt="bill"
+              className="w-[28px] sm:w-auto"
+            />
+            <p className="font-outfit text-[8px] sm:text-[40px] font-bold text-white text-center">
               Tax-Free Business Environment
             </p>
-            <p className="font-alata font-normal text-[28px] text-white text-center">
+            <p className="font-alata font-normal text-[7px] sm:text-[28px] text-white text-center">
               Operating in Dubai means enjoying a tax-free status, allowing you
               to reinvest profits directly into your business. This financial
               edge makes Dubai an attractive hub for maximizing growth
               opportunities.
             </p>
           </div>
-          <div className="p-[35px] bg-[#CF142B] rounded-[20px] flex flex-col gap-[38px] items-center">
-            <img src="/businessSetup/Bill.svg" alt="bill" />
-            <p className="font-outfit text-[40px] font-bold text-white text-center">
+          <div className="sm:p-[35px] w-[40%] sm:w-auto p-[16px_4px] bg-[#CF142B] rounded-[6px] sm:rounded-[20px] flex flex-col gap-[2px] sm:gap-[38px] items-center">
+            <img
+              src="/businessSetup/Bill.svg"
+              alt="bill"
+              className="w-[28px] sm:w-auto"
+            />
+            <p className="font-outfit text-[8px] sm:text-[40px] font-bold text-white text-center">
               Tax-Free Business Environment
             </p>
-            <p className="font-alata font-normal text-[28px] text-white text-center">
+            <p className="font-alata font-normal text-[7px] sm:text-[28px] text-white text-center">
               Operating in Dubai means enjoying a tax-free status, allowing you
               to reinvest profits directly into your business. This financial
               edge makes Dubai an attractive hub for maximizing growth
@@ -71,8 +83,9 @@ export default function BusinessSetup() {
       </div>
 
       {/* Is Dubai Safe Section */}
-      <div className="mt-[305px] px-[70px]">
-        <div className="relative flex">
+      <div className="mt-[52px] sm:mt-[305px] sm:px-[70px]">
+        <img src="/businessSetup/safeBusiness.svg" alt="safe dubai" />
+        <div className="relative hidden sm:flex">
           <div className="z-[2]">
             <img src="/businessSetup/secure.png" alt="secure" />
           </div>
