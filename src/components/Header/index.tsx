@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import "./header.css";
 
@@ -10,7 +11,14 @@ export default function Header() {
   const handleMenuClick = () => {
     setIsMenuOpen(false); // Close menu when any menu item is clicked
   };
-
+  const pathname = usePathname();
+  const menuItems = [
+    { path: "/", label: "Home" },
+    { path: "/ResidencyVisa/", label: "Residency Visa" },
+    { path: "/BusinessServices/", label: "Business Services" },
+    { path: "/BusinessSetup/", label: "Business Setup" },
+    { path: "/Resource/", label: "Resources" },
+  ];
   return (
     <div>
       <div className="relative z-[9]">
@@ -40,23 +48,16 @@ export default function Header() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex gap-x-5 text-white justify-end items-center">
-            <div>
-              <Link href={"/"} className="rounded-red-btn">
-                Home
-              </Link>
-            </div>
-            <div>
-              <Link href={"/ResidencyVisa"}>Residency Visa</Link>
-            </div>
-            <div>
-              <Link href={"/BusinessServices"}>Bussiness Services</Link>
-            </div>
-            <div>
-              <Link href={"/BusinessSetup"}>Business Setup</Link>
-            </div>
-            <div>
-              <Link href={"/Resource"}>Resources</Link>
-            </div>
+            {menuItems.map(({ path, label }) => (
+              <div key={path}>
+                <Link
+                  href={path}
+                  className={pathname === path ? "rounded-red-btn" : ""}
+                >
+                  {label}
+                </Link>
+              </div>
+            ))}
             <div>
               <Link href={"/ContactUs"} className="rounded-white-btn">
                 Contact Us
