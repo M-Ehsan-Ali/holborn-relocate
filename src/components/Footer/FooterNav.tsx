@@ -2,6 +2,7 @@ import Image from "next/legacy/image";
 import Link from "next/link";
 
 export default function FooterNav() {
+  const currentYear = new Date().getFullYear();
   return (
     <div className="text-color_E3F1FF bg-color_003262 md:pl-[80px] md:pr-[80px]">
       <div className="pt-3 pb-3 md:pt-12 px-4">
@@ -163,7 +164,7 @@ export default function FooterNav() {
       <div>
         <div className="border-t border-white">
           <div className="py-3 md:py-5 flex justify-center text-[10px] md:text-[22px] font-bold font-overpass">
-            <div>@2024 Holborn Relocate. All right Reserved</div>
+            <div>@{currentYear} Holborn Relocate. All right Reserved</div>
           </div>
         </div>
       </div>
